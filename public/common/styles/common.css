@@ -789,10 +789,10 @@ nav ul > li > button {
   margin-left: 10px;
 }
 
-.container {
+/* .container {
   display: flex;
   align-items: center;
-}
+} */
 
 .buyShortImg img {
   width: 70px; /* 이미지 너비를 조정 */
