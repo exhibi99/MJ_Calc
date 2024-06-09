@@ -79,6 +79,8 @@
 
 <script>
 
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
 export default {
     data() {
         return{
@@ -118,24 +120,31 @@ export default {
                 this.multiRatio = (this.entryPrice / Math.abs(diff));
                 //alert(`${this.multiRatio}`);
             }
-            else
+            else{
+                navigator.vibrate(30); 
                 alert(`선생님, 진입가와 손절가가 같습니다.(${this.entryPrice})`);
+                return false;
+            }
 
             if(diff < 0){
                 this.isbuy = false;
             }
+            return true;
         },
         calcInvestRiskMoney(){
             this.investRiskMoney = this.investMoney * this.riskRatio;
             // alert(`${this.investRiskMoney}`);
         },
         calcinputTotalMoney(){
-            this.calcMultiRatio();
+            if(this.calcMultiRatio() == false){
+                return false;
+            }
             this.calcInvestRiskMoney();
             this.inputTotalMoney = (this.investRiskMoney * this.multiRatio).toFixed(2);
             //alert(`${this.inputTotalMoney}`);
 
             if(this.checkInputEmpty() == true){
+                navigator.vibrate(30); 
                 alert('선생님, 입력을 채워주세요.')
                 return false;
             }
@@ -145,7 +154,7 @@ export default {
             if(this.calcinputTotalMoney() == false)
                 return false;
             this.isolatedMulti = (this.multiRatio * this.riskRatio).toFixed(2);
-
+            navigator.vibrate(30); 
             this.$refs.calcModal.show();
             return true;
             //alert(`${this.isolatedMulti}`);
@@ -181,12 +190,15 @@ export default {
     },
     computed: {
         formattedEntryPrice() {
+            navigator.vibrate(30); 
             return this.entryPrice ? this.entryPrice.toLocaleString() : '';
         },
         formattedStopLoss() {
+            navigator.vibrate(30); 
             return this.stopLoss ? this.stopLoss.toLocaleString() : '';
         },
         formattedInvestMoney() {
+            navigator.vibrate(30); 
             return this.investMoney ? this.investMoney.toLocaleString() : '';
         },
 
