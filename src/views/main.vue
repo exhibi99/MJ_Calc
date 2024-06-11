@@ -49,9 +49,14 @@
                         <label class="cate"><i class="bi bi-check-lg" />손절가</label>
                         <label class="value">{{ formattedStopLoss }}</label>
                     </div>
-                    <div class="calcdata">
+                    <div class="calcdata" @mouseover="showTooltip = true" @mouseout="showTooltip = false">
                         <label class="cate"><i class="bi bi-check-lg" />배율</label>
                         <label class="value">{{ multiRatio.toFixed(2) }}</label>
+                        <div class="calctooltip" v-show="showTooltip" @touchstart="showTooltip = false">
+                            <div class="tooltip-content">
+                                <img src="/images/MulValue.png" alt="배율 수식">
+                            </div>
+                        </div>
                     </div>
                     <div class="calcdata">
                         <label class="cate"><i class="bi bi-check-lg" />투자금(5%)</label>
@@ -62,9 +67,14 @@
                         <label class="cate"><i class="bi bi-bookmark-check-fill" />진입 총가격</label>
                         <label class="value">{{ formattedInputTotalMoney }}</label>
                     </div>
-                    <div class="calcdata">
+                    <div class="calcdata" @mouseover="showIsolTooltip = true" @mouseout="showIsolTooltip = false">
                         <label class="cate"><i class="bi bi-check-lg" />격리 배율</label>
                         <label class="value">{{ isolatedMulti }}</label>
+                        <div class="Isolatedtooltip" v-show="showIsolTooltip" @touchstart="showIsolTooltip = false">
+                            <div class="tooltip-content">
+                                <img src="/images/IsolateMul.png" alt="배율 수식">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="btnwrap">
@@ -112,7 +122,9 @@ export default {
             buy_image: "/images/buy_long.png",
             sell_image: "/images/sell_short.png",
             isbuy: true,
-            alertMessage: ""
+            alertMessage: "",
+            showTooltip: false,
+            showIsolTooltip: false,
         };
     },
     created() {
@@ -208,6 +220,14 @@ export default {
             )
                 return true;
             return false;
+        },
+        showTooltipOnMouseOver() {
+            console.log("Mouse over detected");
+            this.showTooltip = true;
+        },
+        hideTooltipOnMouseOut() {
+            console.log("Mouse out detected");
+            this.showTooltip = false;
         },
     },
     computed: {

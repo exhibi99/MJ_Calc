@@ -2042,3 +2042,46 @@ nav ul>li>button {
     padding-top: 10px;
     font-weight: bold;
 }
+.calctooltip {
+    position: absolute;
+    top: 140px;
+    left: 80px;
+    width: 200px; /* 말풍선의 너비 조정 */
+    background-color: transparent;
+    z-index: 99999;
+}
+
+.calctooltip .tooltip-content {
+    background-color: transparent; /* 흰색 배경 설정 */
+    border: none;
+    border-radius: 8px; /* 모서리 둥글게 */
+    position: relative;
+    /*box-shadow: 0 2px 4px rgba(0,0,0,0.2);  그림자 효과 추가 */
+}
+
+.calctooltip .tooltip-content img {
+    max-width: 200px; /* 이미지의 최대 너비 */
+    height: auto; /* 높이를 자동으로 조정 */
+}
+
+.Isolatedtooltip {
+    position: absolute;
+    top: 340px;
+    left: 80px;
+    width: 200px; /* 말풍선의 너비 조정 */
+    background-color: transparent;
+    z-index: 99999;
+}
+
+.Isolatedtooltip .tooltip-content {
+    background-color: transparent; /* 흰색 배경 설정 */
+    border: none;
+    border-radius: 8px; /* 모서리 둥글게 */
+    position: relative;
+    /*box-shadow: 0 2px 4px rgba(0,0,0,0.2);  그림자 효과 추가 */
+}
+
+.Isolatedtooltip .tooltip-content img {
+    max-width: 200px; /* 이미지의 최대 너비 */
+    height: auto; /* 높이를 자동으로 조정 */
+}
