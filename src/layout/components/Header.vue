@@ -33,8 +33,8 @@ export default {
             // 메뉴명 배열
             menulists: [
                 { menutext: "타점 계산", link: "/main" },
-                // { menutext: "자료실", link: "/reference" },
                 { menutext: "정보", link: "/info" },
+                { menutext: "테스트", link: "/test" },
             ],
             selectedIndex: 0,
             form: {

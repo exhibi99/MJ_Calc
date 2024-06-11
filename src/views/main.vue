@@ -2,19 +2,21 @@
     <div id="cal-input">
         <div class="form-group">
             <label for="entryPrice"><i class="bi bi-play-circle-fill"></i> 진입가</label>
-            <input type="number" v-model.number="entryPrice" id="entryPrice" placeholder="진입가를 입력하세요" />
+            <input type="number" v-model.number="entryPrice" id="entryPrice" placeholder="진입가를 입력하세요"
+                @keyup.enter="handleEntryEnter()" />
             <button @click="clearField('entryPrice')" class="clear-icon">
                 <i class="bi bi-trash"></i>
             </button>
-            <label class="formatted-label-entry">{{ formattedEntryPrice }}</label>
+            <label class="formatted-label-entry" @click="calcIsolatedMulti">{{ formattedEntryPrice }}</label>
         </div>
         <div class="form-group">
             <label for="stopLoss"><i class="bi bi-exclamation-circle-fill"></i> 손절가</label>
-            <input type="number" v-model.number="stopLoss" id="stopLoss" placeholder="손절가를 입력하세요" />
+            <input type="number" v-model.number="stopLoss" id="stopLoss" placeholder="손절가를 입력하세요"
+                @keyup.enter="handleLossEnter()" />
             <button @click="clearField('stopLoss')" class="clear-icon">
                 <i class="bi bi-trash"></i>
             </button>
-            <label class="formatted-label-loss">{{ formattedStopLoss }}</label>
+            <label class="formatted-label-loss" @click="calcIsolatedMulti">{{ formattedStopLoss }}</label>
         </div>
         <div class="form-group">
             <label for="investMoney"><i class="bi bi-wallet2"></i> 투자금</label>
@@ -23,7 +25,7 @@
             <button @click="clearField('investMoney')" class="clear-icon">
                 <i class="bi bi-trash"></i>
             </button>
-            <label class="formatted-label-invest">{{ formattedInvestMoney }}</label>
+            <label class="formatted-label-invest" @click="calcIsolatedMulti">{{ formattedInvestMoney }}</label>
         </div>
         <div class="calculate-button-container">
             <button class="calculate-button" @click="calcIsolatedMulti">
@@ -142,10 +144,10 @@ export default {
                 // if (this.isSafari != true) {
                 //     navigator.vibrate(30);
                 // }
-                if(this.entryPrice == 0){
+                if (this.entryPrice == 0) {
                     this.alertMessage = "입력을 모두 채워주세요.";
                 }
-                else{
+                else {
                     this.alertMessage = `진입가와 손절가가 같습니다.( ${this.entryPrice} )`;
                 }
                 this.$refs.alertModal.show();
@@ -229,6 +231,26 @@ export default {
             console.log("Mouse out detected");
             this.showTooltip = false;
         },
+        handleEntryEnter() {
+            if (this.stopLoss == "") {
+                document.getElementById('stopLoss').focus();
+            }
+            else {
+                if (!this.checkInputEmpty()) {
+                    this.calcIsolatedMulti();
+                }
+            }
+        },
+        handleLossEnter() {
+            if (this.investMoney == '') {
+                document.getElementById('investMoney').focus();
+            }
+            else {
+                if (!this.checkInputEmpty()) {
+                    this.calcIsolatedMulti();
+                }
+            }
+        }
     },
     computed: {
         formattedEntryPrice() {

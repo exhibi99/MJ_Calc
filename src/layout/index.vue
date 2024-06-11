@@ -1,6 +1,6 @@
 <template>
     <section id="wrap">
-        <h1 class="blind">웹사이트 제목</h1>
+        <h1 class="blind">MJ 타점계산기</h1>
         <Header />
         <section id="container">
             <router-view /> <!-- 각 메뉴에 따라 변경할 컴포넌트 영역의 라우터 태그 -->

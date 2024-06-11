@@ -3,6 +3,7 @@ const withPrefix = (prefix, routes) =>
     route.path = prefix + route.path;
     return route;
 });
+
 const pageRouter = {
     path: "/",
     name: "layout",
@@ -23,6 +24,11 @@ const pageRouter = {
             path: "/info",
             name: "info",
             component: () => import("@/views/information.vue"),
+        },
+        {
+            path: "/test",
+            name: "test",
+            component: () => import("@/views/test.vue"),
         },
     ],
 };
