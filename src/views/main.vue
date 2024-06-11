@@ -72,7 +72,7 @@
                         <label class="value">{{ isolatedMulti }}</label>
                         <div class="Isolatedtooltip" v-show="showIsolTooltip" @touchstart="showIsolTooltip = false">
                             <div class="tooltip-content">
-                                <img src="/images/IsolateMul.png" alt="배율 수식">
+                                <img src="/images/IsolateMul.png" alt="격리배율 수식">
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,6 @@ export default {
             stopLoss: "",
             investMoney: "",
             submitted: false,
-            calcPath: "/calc",
             riskRatio: 0.05,
             multiRatio: 1,
             investRiskMoney: 0,
@@ -140,9 +139,9 @@ export default {
             if (diff !== 0) {
                 this.multiRatio = this.entryPrice / Math.abs(diff);
             } else {
-                if (this.isSafari != true) {
-                    navigator.vibrate(30);
-                }
+                // if (this.isSafari != true) {
+                //     navigator.vibrate(30);
+                // }
                 if(this.entryPrice == 0){
                     this.alertMessage = "입력을 모두 채워주세요.";
                 }
@@ -170,9 +169,9 @@ export default {
             this.inputTotalMoney = (this.investRiskMoney * this.multiRatio).toFixed(2);
 
             if (this.checkInputEmpty() == true) {
-                if (this.isSafari != true) {
-                    navigator.vibrate(30);
-                }
+                // if (this.isSafari != true) {
+                //     navigator.vibrate(30);
+                // }
                 this.alertMessage = "입력을 채워주세요.";
                 this.$refs.alertModal.show();
                 setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
@@ -183,9 +182,9 @@ export default {
         calcIsolatedMulti() {
             if (this.calcinputTotalMoney() == false) return false;
             this.isolatedMulti = (this.multiRatio * this.riskRatio).toFixed(2);
-            if (this.isSafari != true) {
-                navigator.vibrate(30);
-            }
+            // if (this.isSafari != true) {
+            //     navigator.vibrate(30);
+            // }
             this.$refs.calcModal.show();
             return true;
         },
@@ -233,21 +232,21 @@ export default {
     },
     computed: {
         formattedEntryPrice() {
-            if (this.isSafari != true) {
-                navigator.vibrate(30);
-            }
+            // if (this.isSafari != true) {
+            //     navigator.vibrate(30);
+            // }
             return this.entryPrice ? this.entryPrice.toLocaleString() : "";
         },
         formattedStopLoss() {
-            if (this.isSafari != true) {
-                navigator.vibrate(30);
-            }
+            // if (this.isSafari != true) {
+            //     navigator.vibrate(30);
+            // }
             return this.stopLoss ? this.stopLoss.toLocaleString() : "";
         },
         formattedInvestMoney() {
-            if (this.isSafari != true) {
-                navigator.vibrate(30);
-            }
+            // if (this.isSafari != true) {
+            //     navigator.vibrate(30);
+            // }
             return this.investMoney ? this.investMoney.toLocaleString() : "";
         },
         formattedInvestRiskMoney() {
@@ -261,7 +260,6 @@ export default {
     },
     mounted() {
         // this.isSafari = this.checkIfSafari();
-        this.isSafari = true;
     },
 };
 </script>
