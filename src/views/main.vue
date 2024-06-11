@@ -100,12 +100,6 @@
 </template>
 
 <script>
-navigator.vibrate =
-    navigator.vibrate ||
-    navigator.webkitVibrate ||
-    navigator.mozVibrate ||
-    navigator.msVibrate;
-
 export default {
     data() {
         return {
