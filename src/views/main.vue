@@ -29,10 +29,9 @@
             <button class="calculate-button" @click="calcIsolatedMulti">
                 계산하기
             </button>
-            <!-- <button class="calculate-button" @click="calcIsolatedMulti">계산하기</button> -->
         </div>
 
-        <b-modal id="login" class="modal" hide-footer ref="calcModal">
+        <b-modal id="calcModal" class="modal" hide-footer ref="calcModal">
             <template #modal-title>
                 <div class="layertit"><i class="bi bi-calculator-fill" />진입금액</div>
                 <div class="buyShortImg">
@@ -45,14 +44,11 @@
                     <div class="entryprice">
                         <label class="cate"><i class="bi bi-check-lg" />진입가</label>
                         <label class="value">{{ formattedEntryPrice }}</label>
-                        <!-- <button class="copy-button" v-clipboard:copy="formattedEntryPrice" v-clipboard:success="onCopy">복사</button> -->
                     </div>
                     <div class="lossprice">
                         <label class="cate"><i class="bi bi-check-lg" />손절가</label>
                         <label class="value">{{ formattedStopLoss }}</label>
-                        <!-- <button class="copy-button" v-clipboard:copy="formattedEntryPrice" v-clipboard:success="onCopy">복사</button> -->
                     </div>
-                    <!-- <b-form-input id="id" placeholder="아이디를 입력해 주세요" /> -->
                     <div class="calcdata">
                         <label class="cate"><i class="bi bi-check-lg" />배율</label>
                         <label class="value">{{ multiRatio.toFixed(2) }}</label>
@@ -62,7 +58,6 @@
                         <label class="value">{{ formattedInvestRiskMoney }}</label>
                     </div>
                     <div class="spacer"></div>
-                    <!-- Spacer added here -->
                     <div class="totalInvest">
                         <label class="cate"><i class="bi bi-bookmark-check-fill" />진입 총가격</label>
                         <label class="value">{{ formattedInputTotalMoney }}</label>
@@ -71,11 +66,26 @@
                         <label class="cate"><i class="bi bi-check-lg" />격리 배율</label>
                         <label class="value">{{ isolatedMulti }}</label>
                     </div>
-
-                    <!-- <b-form-input type="password" id="pass" placeholder="비밀번호를 입력해 주세요" /> -->
                 </div>
                 <div class="btnwrap">
                     <b-button variant="login" @click="closeCalcModal">확 인</b-button>
+                </div>
+            </div>
+        </b-modal>
+
+        <b-modal id="alertModal" class="modal" hide-footer ref="alertModal">
+            <template #modal-title>
+                <div class="layertit">
+                    <i class="bi bi-exclamation-triangle-fill small-icon" /> 
+                    <span class="alertInfo">알림</span>
+                </div>
+            </template>
+            <div class="modalcontainer">
+                <div class="alertMessage">
+                    <label class="cate">{{ alertMessage }}</label>
+                </div>
+                <div class="btnwrap">
+                    <b-button variant="login" @click="closeAlertModal">확 인</b-button>
                 </div>
             </div>
         </b-modal>
@@ -105,6 +115,7 @@ export default {
             buy_image: "/images/buy_long.png",
             sell_image: "/images/sell_short.png",
             isbuy: true,
+            alertMessage: ""
         };
     },
     created() {
@@ -115,7 +126,6 @@ export default {
             this.submitted = true;
         },
         goToPage(path) {
-            // this.$router.push(path); // Vue Router의 내장된 메소드를 사용하여 페이지 이동
             this.isModalOpen = true;
         },
         closeModal() {
@@ -126,10 +136,16 @@ export default {
             this.isbuy = true;
             if (diff !== 0) {
                 this.multiRatio = this.entryPrice / Math.abs(diff);
-                //alert(`${this.multiRatio}`);
             } else {
                 navigator.vibrate(30);
-                alert(`선생님, 진입가와 손절가가 같습니다.(${this.entryPrice})`);
+                if(this.entryPrice == 0){
+                    this.alertMessage = "선생님, 입력을 채워주세요.";
+                }
+                else{
+                    this.alertMessage = `선생님, 진입가와 손절가가 같습니다.(${this.entryPrice})`;
+                }
+                this.$refs.alertModal.show();
+                setTimeout(this.closeAlertModal, 1000); // 1초 뒤에 모달 닫기
                 return false;
             }
 
@@ -140,21 +156,19 @@ export default {
         },
         calcInvestRiskMoney() {
             this.investRiskMoney = this.investMoney * this.riskRatio;
-            // alert(`${this.investRiskMoney}`);
         },
         calcinputTotalMoney() {
             if (this.calcMultiRatio() == false) {
                 return false;
             }
             this.calcInvestRiskMoney();
-            this.inputTotalMoney = (this.investRiskMoney * this.multiRatio).toFixed(
-                2
-            );
-            //alert(`${this.inputTotalMoney}`);
+            this.inputTotalMoney = (this.investRiskMoney * this.multiRatio).toFixed(2);
 
             if (this.checkInputEmpty() == true) {
                 navigator.vibrate(30);
-                alert("선생님, 입력을 채워주세요.");
+                this.alertMessage = "선생님, 입력을 채워주세요.";
+                this.$refs.alertModal.show();
+                setTimeout(this.closeAlertModal, 1000); // 1초 뒤에 모달 닫기
                 return false;
             }
             return true;
@@ -165,13 +179,12 @@ export default {
             navigator.vibrate(30);
             this.$refs.calcModal.show();
             return true;
-            //alert(`${this.isolatedMulti}`);
         },
         clearCalcValue() {
-            (this.entryPrice = ""),
-                (this.stopLoss = ""),
-                (this.investMoney = ""),
-                (this.multiRatio = 1);
+            this.entryPrice = "";
+            this.stopLoss = "";
+            this.investMoney = "";
+            this.multiRatio = 1;
             this.investRiskMoney = 0;
             this.inputTotalMoney = 0;
             this.isolatedMulti = 1;
@@ -180,7 +193,9 @@ export default {
         closeCalcModal() {
             this.$refs.calcModal.hide(); // 모달을 닫는 메서드 호출
         },
-
+        closeAlertModal() {
+            this.$refs.alertModal.hide();
+        },
         clearField(field) {
             console.log(`${field} 지우기`);
             this[field] = "";
@@ -190,9 +205,9 @@ export default {
         },
         checkInputEmpty() {
             if (
-                this.entryPrice == "" ||
-                this.stopLoss == "" ||
-                this.investMoney == ""
+                this.entryPrice === "" ||
+                this.stopLoss === "" ||
+                this.investMoney === ""
             )
                 return true;
             return false;
@@ -211,7 +226,6 @@ export default {
             navigator.vibrate(30);
             return this.investMoney ? this.investMoney.toLocaleString() : "";
         },
-
         formattedInvestRiskMoney() {
             return this.investRiskMoney
                 ? this.investRiskMoney.toFixed(2).toLocaleString()

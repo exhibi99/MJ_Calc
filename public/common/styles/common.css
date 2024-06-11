@@ -2024,3 +2024,11 @@ nav ul>li>button {
     /* 이미지의 비율을 유지하면서 높이 자동 조정 */
     border-radius: 8%;
 }
+
+.small-icon {
+    font-size: 1.0rem; /* 원하는 크기로 조정 */
+    color: rgb(143, 25, 25);
+}
+.alertInfo{
+    font-size: 18px;
+}
