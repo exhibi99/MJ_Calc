@@ -76,16 +76,13 @@
         <b-modal id="alertModal" class="modal" hide-footer ref="alertModal">
             <template #modal-title>
                 <div class="layertit">
-                    <i class="bi bi-exclamation-triangle-fill small-icon" /> 
+                    <i class="bi bi-exclamation-triangle-fill small-icon"></i>
                     <span class="alertInfo">알림</span>
                 </div>
             </template>
             <div class="modalcontainer">
                 <div class="alertMessage">
-                    <label class="cate">{{ alertMessage }}</label>
-                </div>
-                <div class="btnwrap">
-                    <b-button variant="login" @click="closeAlertModal">확 인</b-button>
+                    <label>{{ alertMessage }}</label>
                 </div>
             </div>
         </b-modal>
@@ -139,13 +136,13 @@ export default {
             } else {
                 navigator.vibrate(30);
                 if(this.entryPrice == 0){
-                    this.alertMessage = "선생님, 입력을 채워주세요.";
+                    this.alertMessage = "입력을 모두 채워주세요.";
                 }
                 else{
-                    this.alertMessage = `선생님, 진입가와 손절가가 같습니다.(${this.entryPrice})`;
+                    this.alertMessage = `진입가와 손절가가 같습니다.( ${this.entryPrice} )`;
                 }
                 this.$refs.alertModal.show();
-                setTimeout(this.closeAlertModal, 1000); // 1초 뒤에 모달 닫기
+                setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
                 return false;
             }
 
@@ -166,9 +163,9 @@ export default {
 
             if (this.checkInputEmpty() == true) {
                 navigator.vibrate(30);
-                this.alertMessage = "선생님, 입력을 채워주세요.";
+                this.alertMessage = "입력을 채워주세요.";
                 this.$refs.alertModal.show();
-                setTimeout(this.closeAlertModal, 1000); // 1초 뒤에 모달 닫기
+                setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
                 return false;
             }
             return true;

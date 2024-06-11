@@ -2031,4 +2031,12 @@ nav ul>li>button {
 }
 .alertInfo{
     font-size: 18px;
+    color: rgb(143, 73, 33);
+}
+
+.alertMessage > label{
+    font-size: 16px;
+    color: rgb(40, 53, 134);
+    padding-top: 10px;
+    font-weight: bold;
 }
