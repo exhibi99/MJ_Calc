@@ -260,7 +260,8 @@ export default {
         },
     },
     mounted() {
-        this.isSafari = this.checkIfSafari();
+        // this.isSafari = this.checkIfSafari();
+        this.isSafari = true;
     },
 };
 </script>
