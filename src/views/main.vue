@@ -146,7 +146,9 @@ export default {
             if (diff !== 0) {
                 this.multiRatio = this.entryPrice / Math.abs(diff);
             } else {
-                navigator.vibrate(30);
+                if (this.isSafari != true) {
+                    navigator.vibrate(30);
+                }
                 if(this.entryPrice == 0){
                     this.alertMessage = "입력을 모두 채워주세요.";
                 }
@@ -174,7 +176,9 @@ export default {
             this.inputTotalMoney = (this.investRiskMoney * this.multiRatio).toFixed(2);
 
             if (this.checkInputEmpty() == true) {
-                navigator.vibrate(30);
+                if (this.isSafari != true) {
+                    navigator.vibrate(30);
+                }
                 this.alertMessage = "입력을 채워주세요.";
                 this.$refs.alertModal.show();
                 setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
@@ -185,7 +189,9 @@ export default {
         calcIsolatedMulti() {
             if (this.calcinputTotalMoney() == false) return false;
             this.isolatedMulti = (this.multiRatio * this.riskRatio).toFixed(2);
-            navigator.vibrate(30);
+            if (this.isSafari != true) {
+                navigator.vibrate(30);
+            }
             this.$refs.calcModal.show();
             return true;
         },
@@ -198,6 +204,7 @@ export default {
             this.inputTotalMoney = 0;
             this.isolatedMulti = 1;
             this.isbuy = true;
+            isSafari: false;
         },
         closeCalcModal() {
             this.$refs.calcModal.hide(); // 모달을 닫는 메서드 호출
@@ -232,15 +239,21 @@ export default {
     },
     computed: {
         formattedEntryPrice() {
-            navigator.vibrate(30);
+            if (this.isSafari != true) {
+                navigator.vibrate(30);
+            }
             return this.entryPrice ? this.entryPrice.toLocaleString() : "";
         },
         formattedStopLoss() {
-            navigator.vibrate(30);
+            if (this.isSafari != true) {
+                navigator.vibrate(30);
+            }
             return this.stopLoss ? this.stopLoss.toLocaleString() : "";
         },
         formattedInvestMoney() {
-            navigator.vibrate(30);
+            if (this.isSafari != true) {
+                navigator.vibrate(30);
+            }
             return this.investMoney ? this.investMoney.toLocaleString() : "";
         },
         formattedInvestRiskMoney() {
@@ -251,6 +264,9 @@ export default {
         formattedInputTotalMoney() {
             return this.inputTotalMoney ? this.inputTotalMoney.toLocaleString() : "";
         },
+    },
+    mounted() {
+        this.isSafari = this.checkIfSafari();
     },
 };
 </script>
