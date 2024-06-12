@@ -46,8 +46,7 @@ export default {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         },
         displayRandomGif() {
-            const userAgent = navigator.userAgent;
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
+            const isLandscape = window.innerWidth > window.innerHeight;
 
             const gifWidth = window.innerWidth * 0.5; // 이미지 너비를 화면 너비의 50%로 설정
             const gifHeight = gifWidth; // 이미지를 정사각형으로 가정
@@ -55,7 +54,8 @@ export default {
             const minLeft = 50;
             const maxLeft = window.innerWidth - gifWidth;
             let maxTop = 50;//window.innerHeight - gifHeight;
-            if(isMobile){
+
+            if(!isLandscape){
                 minTop = 20;
                 maxTop = 300;//window.innerHeight - gifHeight;
             }
