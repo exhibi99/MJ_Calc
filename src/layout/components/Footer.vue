@@ -1,7 +1,7 @@
 <template>
       <footer class="bg-light text-center py-3">
         <div class="footContainer">
-          <p> ver_24.06.09 </p>
+          <p> {{currentYear}}.{{currentMonth}}.{{currentDay}}_{{ver_data}} </p>
         </div>
       </footer>
 </template>
@@ -11,7 +11,10 @@
 export default {
     data() {
         const currentDate = new Date();
+
         return{
+            ver_data: 'v001',
+
             currentDate: currentDate,
             currentYear: currentDate.getFullYear(),
             currentMonth: currentDate.getMonth() + 1, // 월은 0부터 시작하므로 1을 더합니다.

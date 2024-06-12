@@ -2005,11 +2005,14 @@ nav ul>li>button {
 
 .footContainer {
     background: rgb(36, 32, 54);
-    height: 30px;
+    height: 12px;
     display: flex;
     align-items: center;
-    /* 요소를 수직 가운데로 정렬합니다. */
     justify-content: center;
+}
+
+.footContainer > P{
+    font-size: 10px;
 }
 
 .buyShortImg {
