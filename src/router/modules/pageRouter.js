@@ -16,11 +16,6 @@ const pageRouter = {
             component: () => import("@/views/main.vue"),
         },
         {
-            path: "/reference",
-            name: "reference",
-            component: () => import("@/views/reference.vue"),
-        },
-        {
             path: "/info",
             name: "info",
             component: () => import("@/views/information.vue"),

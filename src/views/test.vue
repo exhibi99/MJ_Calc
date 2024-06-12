@@ -13,22 +13,24 @@ export default {
             gifs: [
                 '/images/NBA/NBA_1.gif',
                 '/images/NBA/NBA_2.gif',
-                '/images/NBA/NBA_3.gif',
+                // '/images/NBA/NBA_3.gif',
                 '/images/NBA/NBA_4.gif',
                 '/images/NBA/NBA_5.gif',
                 '/images/NBA/NBA_6.gif',
                 '/images/NBA/NBA_7.gif',
-                '/images/NBA/NBA_8.gif',
-                '/images/NBA/NBA_9.gif',
-                '/images/NBA/NBA_10.gif',
-                '/images/NBA/NBA_11.gif',
+                // '/images/NBA/NBA_8.gif',
+                // '/images/NBA/NBA_9.gif',
+                // '/images/NBA/NBA_10.gif',
+                // '/images/NBA/NBA_11.gif',
                 '/images/NBA/NBA_12.gif',
                 '/images/NBA/NBA_13.gif',
-                '/images/NBA/NBA_14.gif',
+                // '/images/NBA/NBA_14.gif',
                 '/images/NBA/NBA_15.gif',
                 '/images/NBA/NBA_16.gif',
                 '/images/NBA/NBA_17.gif',
                 '/images/NBA/NBA_18.gif',
+                '/images/NBA/NBA_19.gif',
+                '/images/NBA/NBA_20.gif',
                 // 다른 GIF 파일들도 여기에 추가
             ],
             selectedGif: null,
@@ -110,6 +112,7 @@ export default {
     background-color: rgba(32, 175, 168, 0.15);
     padding: 20px;
     border-radius: 5px;
+    z-index: 999;
 }
 
 .random-gif {
@@ -128,5 +131,21 @@ export default {
     /* 원하는 정도로 조절할 수 있습니다. */
     overflow: hidden;
     /* 부드러운 외곽을 위해 반드시 추가되어야 합니다. */
+}
+
+/* PC 화면에서 이미지 크기 설정 */
+@media only screen and (min-width: 768px) {
+    .random-gif {
+        max-width: 40vw;
+        max-height: 40vw;
+    }
+}
+
+/* 모바일 화면에서 이미지 크기 설정 */
+@media only screen and (max-width: 767px) {
+    .random-gif {
+        max-width: 70vw;
+        max-height: 70vw;
+    }
 }
 </style>
