@@ -23,6 +23,12 @@ export default {
                 '/images/NBA/NBA_10.gif',
                 '/images/NBA/NBA_11.gif',
                 '/images/NBA/NBA_12.gif',
+                '/images/NBA/NBA_13.gif',
+                '/images/NBA/NBA_14.gif',
+                '/images/NBA/NBA_15.gif',
+                '/images/NBA/NBA_16.gif',
+                '/images/NBA/NBA_17.gif',
+                '/images/NBA/NBA_18.gif',
                 // 다른 GIF 파일들도 여기에 추가
             ],
             selectedGif: null,
