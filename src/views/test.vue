@@ -108,7 +108,7 @@ export default {
     font-size: 1.5em;
     color: white;
     background-color: rgba(32, 175, 168, 0.15);
-    padding: 5px;
+    padding: 20px;
     border-radius: 5px;
 }
 

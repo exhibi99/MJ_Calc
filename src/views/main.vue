@@ -1,7 +1,7 @@
 <template>
     <div id="cal-input">
         <div class="form-group">
-            <label for="entryPrice"><i class="bi bi-play-circle-fill"></i> 진입가</label>
+            <label for="entryPrice"><i class="bi bi-arrow-right-circle-fill"></i> 진입가</label>
             <input type="number" v-model.number="entryPrice" id="entryPrice" placeholder="진입가를 입력하세요"
                 @keyup.enter="handleEntryEnter()" />
             <button @click="clearField('entryPrice')" class="clear-icon">

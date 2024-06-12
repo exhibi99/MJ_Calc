@@ -1,28 +1,31 @@
 <template>
     <header :class="Topclass">
         <div class="topmenu">
-            <div class="contentbox">
+            <div class="logobox">
                 <div class="logo">
                     <button v-on:click="goToPage('/main', 0)">
                         <img src="/images/mj_calc_logo.png" alt="MJ 타점계산기" />
                     </button>
                 </div>
             </div>
+            <div class="music">
+                <button @click="togglePlayback">
+                    <i v-if="isPlaying" class="bi bi-stop-circle-fill"></i>
+                    <i v-else class="bi bi-play-circle-fill"></i>
+                </button>
+                <audio ref="audio" :src="audioSource"></audio>
+            </div>
         </div>
         <nav>
             <div class="contentbox">
                 <ul>
-                    <li
-                        v-for="(item, index) in menulists"
-                        :key="index"
-                        v-on:click="goToPage(item.link, index)"
-                        :class="{ selected: selectedIndex === index }"
-                    >
+                    <li v-for="(item, index) in menulists" :key="index" v-on:click="goToPage(item.link, index)"
+                        :class="{ selected: selectedIndex === index }">
                         <button v-html="item.menutext"></button>
                     </li>
                 </ul>
             </div>
-        </nav> 
+        </nav>
 
     </header>
 </template>
@@ -44,6 +47,8 @@ export default {
                 checkedtype: [],
             },
             Topclass: "",
+            isPlaying: false,
+            audioSource: '/musics/cavatina.mp3' // 여기에 음악 파일 경로를 넣어주세요
         };
     },
     mounted() {
@@ -80,6 +85,49 @@ export default {
                 this.Topclass = "scrollTop";
             }
         },
-    },
+        togglePlayback() {
+            const audio = this.$refs.audio;
+            if (this.isPlaying) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            this.isPlaying = !this.isPlaying;
+        },
+    }
 };
 </script>
+
+<style>
+
+.topmenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    position: relative; /* 로고 상자에 position: relative; 적용 */
+} 
+
+.logobox {
+    flex: 1;
+    text-align: center;
+}
+
+.music {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    z-index: 10; /* 다른 요소 위에 표시되도록 설정 */
+    display: flex; /* 요소가 제대로 표시되도록 설정 */
+    align-items: center; /* 요소를 수직으로 가운데 정렬 */
+}
+
+/* 재생 아이콘의 색상 */
+.bi-play-circle {
+    color: rgb(52, 7, 173); /* 재생 아이콘의 색상을 녹색으로 지정 */
+}
+
+/* 정지 아이콘의 색상 */
+.bi-stop-circle {
+    color: rgb(23, 54, 138); /* 정지 아이콘의 색상을 빨간색으로 지정 */
+}
+</style>
