@@ -10,7 +10,7 @@
             </div>
             <div class="music">
                 <button @click="togglePlayback">
-                    <i v-if="isPlaying" class="bi bi-stop-circle-fill"></i>
+                    <i v-if="isPlaying" class="bi bi-pause-circle-fill"></i>
                     <i v-else class="bi bi-play-circle-fill"></i>
                 </button>
                 <audio ref="audio" :src="audioSource" loop></audio>
@@ -144,7 +144,7 @@ export default {
 }
 
 /* 정지 아이콘의 색상 */
-.bi-stop-circle-fill {
+.bi-pause-circle-fill {
     color: rgb(23, 54, 138); /* 정지 아이콘의 색상을 지정 */
 }
 </style>
