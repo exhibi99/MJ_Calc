@@ -13,7 +13,7 @@
                     <i v-if="isPlaying" class="bi bi-stop-circle-fill"></i>
                     <i v-else class="bi bi-play-circle-fill"></i>
                 </button>
-                <audio ref="audio" :src="audioSource"></audio>
+                <audio ref="audio" :src="audioSource" loop></audio>
             </div>
         </div>
         <nav>
@@ -26,9 +26,9 @@
                 </ul>
             </div>
         </nav>
-
     </header>
 </template>
+
 <script>
 export default {
     data() {
@@ -43,18 +43,21 @@ export default {
             form: {
                 id: "",
                 pass: "",
-                mail:"",
+                mail: "",
                 checkedtype: [],
             },
             Topclass: "",
             isPlaying: false,
-            audioSource: '/musics/cavatina.mp3' // 여기에 음악 파일 경로를 넣어주세요
+            audioSource: '/musics/cavatina.mp3', // 여기에 음악 파일 경로를 넣어주세요
+            originalTitle: 'MJ 타점계산기', // 원래 제목
+            scrollTitle: '', // 스크롤할 제목
         };
     },
     mounted() {
         // window.addEventListener("scroll", this.handleScroll);
     },
-    beforeDestory() {
+    beforeDestroy() {
+        this.stopTitleScroll();
         // window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
@@ -62,7 +65,6 @@ export default {
             if (this.$router.currentRoute.path !== target) {
                 this.selectedIndex = index;
                 this.$router.push(target);
-                selectedIndex = index;
             }
         },
         Joinmember(event) {
@@ -75,7 +77,6 @@ export default {
                 this.form.checkedtype = [];
             });
         },
-        
         handleScroll() {
             const scrollTop = window.pageYOffset;
             const headerTop = document.querySelector("header").clientHeight;
@@ -89,23 +90,39 @@ export default {
             const audio = this.$refs.audio;
             if (this.isPlaying) {
                 audio.pause();
+                this.stopTitleScroll();
             } else {
                 audio.play();
+                this.startTitleScroll();
             }
             this.isPlaying = !this.isPlaying;
         },
+        startTitleScroll() {
+            const musicTitle = ' [ ♫ Cavatina ] Deer Hunter OST';
+            const padding = ' ···';
+            this.scrollTitle = musicTitle + padding.repeat(5);
+            let scrollIndex = 0;
+
+            this.titleScrollInterval = setInterval(() => {
+                document.title = this.scrollTitle.substring(scrollIndex) + this.scrollTitle.substring(0, scrollIndex);
+                scrollIndex = (scrollIndex + 1) % this.scrollTitle.length;
+            }, 800); // 300ms마다 제목 변경
+        },
+        stopTitleScroll() {
+            clearInterval(this.titleScrollInterval);
+            document.title = this.originalTitle;
+        }
     }
 };
 </script>
 
 <style>
-
 .topmenu {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: center;
     position: relative; /* 로고 상자에 position: relative; 적용 */
-} 
+}
 
 .logobox {
     flex: 1;
@@ -123,11 +140,11 @@ export default {
 
 /* 재생 아이콘의 색상 */
 .bi-play-circle-fill {
-    color: rgb(52, 7, 173); /* 재생 아이콘의 색상을 녹색으로 지정 */
+    color: rgb(52, 7, 173); /* 재생 아이콘의 색상을 지정 */
 }
 
 /* 정지 아이콘의 색상 */
 .bi-stop-circle-fill {
-    color: rgb(23, 54, 138); /* 정지 아이콘의 색상을 빨간색으로 지정 */
+    color: rgb(23, 54, 138); /* 정지 아이콘의 색상을 지정 */
 }
 </style>
