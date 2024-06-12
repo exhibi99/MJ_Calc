@@ -122,12 +122,12 @@ export default {
 }
 
 /* 재생 아이콘의 색상 */
-.bi-play-circle {
+.bi-play-circle-fill {
     color: rgb(52, 7, 173); /* 재생 아이콘의 색상을 녹색으로 지정 */
 }
 
 /* 정지 아이콘의 색상 */
-.bi-stop-circle {
+.bi-stop-circle-fill {
     color: rgb(23, 54, 138); /* 정지 아이콘의 색상을 빨간색으로 지정 */
 }
 </style>
