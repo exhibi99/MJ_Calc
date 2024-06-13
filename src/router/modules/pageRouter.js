@@ -15,9 +15,9 @@ const pageRouter = {
             component: () => import("@/views/information.vue"),
         },
         {
-            path: "/test",
-            name: "test",
-            component: () => import("@/views/test.vue"),
+            path: "/sketch",
+            name: "sketch",
+            component: () => import("@/views/sketch.vue"),
         },
     ],
 };

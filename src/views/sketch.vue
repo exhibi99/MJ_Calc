@@ -7,29 +7,12 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
-            gifs: [
-                '/images/NBA/NBA_1.gif',
-                '/images/NBA/NBA_2.gif',
-                // '/images/NBA/NBA_3.gif',
-                '/images/NBA/NBA_4.gif',
-                '/images/NBA/NBA_5.gif',
-                '/images/NBA/NBA_6.gif',
-                '/images/NBA/NBA_7.gif',
-                '/images/NBA/NBA_12.gif',
-                '/images/NBA/NBA_13.gif',
-                '/images/NBA/NBA_15.gif',
-                '/images/NBA/NBA_16.gif',
-                '/images/NBA/NBA_17.gif',
-                '/images/NBA/NBA_18.gif',
-                '/images/NBA/NBA_19.gif',
-                '/images/NBA/NBA_20.gif',
-
-                '/images/SLAM/SLAM_1.gif',
-                '/images/SLAM/SLAM_2.gif',
-            ],
+            gifs: [], // 초기에 빈 배열로 설정
             selectedGif: null,
             randomTop: 0,
             randomLeft: 0,
@@ -50,16 +33,15 @@ export default {
             let minTop = 5; // 최소 y 좌표=
             const minLeft = 50;
             const maxLeft = window.innerWidth - gifWidth;
-            let maxTop = 50;//window.innerHeight - gifHeight;
+            let maxTop = 50; // window.innerHeight - gifHeight;
 
-            if(!isLandscape){
+            if (!isLandscape) {
                 minTop = 20;
-                maxTop = 300;//window.innerHeight - gifHeight;
+                maxTop = 300; // window.innerHeight - gifHeight;
             }
 
             this.randomTop = this.getRandomInt(minTop, maxTop);
             this.randomLeft = this.getRandomInt(minLeft, maxLeft);
-
             this.selectedGif = this.gifs[this.getRandomInt(0, this.gifs.length - 1)];
             this.resetCountdown();
         },
@@ -78,6 +60,15 @@ export default {
                     clearInterval(this.countdownIntervalId);
                 }
             }, 1000);
+        },
+        async loadGifs() {
+            try {
+                const response = await axios.get('/config/gifs_list.json'); // 경로는 적절하게 수정해주세요
+                this.gifs = response.data.gifs; // JSON에서 gifs 배열을 가져와 데이터에 설정합니다
+                this.startGifRotation(); // GIF 이미지 로드 후 GIF 회전 시작
+            } catch (error) {
+                console.error('Error loading gifs:', error);
+            }
         }
     },
     computed: {
@@ -89,7 +80,7 @@ export default {
         }
     },
     mounted() {
-        this.startGifRotation();
+        this.loadGifs(); // 컴포넌트가 마운트되면 GIF 이미지를 로드합니다.
         window.addEventListener('resize', this.displayRandomGif);
     },
     beforeDestroy() {
