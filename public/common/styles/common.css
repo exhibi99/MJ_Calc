@@ -2218,6 +2218,7 @@ input:checked + .slider:before {
 
 .risk-tabs .tab {
     padding: 5px;
+    font-size: 10px;
     cursor: pointer;
     border: 1px solid #ddd;
     text-align: center;
