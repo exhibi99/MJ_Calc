@@ -13,7 +13,7 @@
                     <i v-if="isPlaying" class="bi bi-pause-circle-fill"></i>
                     <i v-else class="bi bi-play-circle-fill"></i>
                 </button>
-                <audio ref="audio" :src="audioSource" loop></audio>
+                <audio ref="audio" :src="currentAudioSource.src" @ended="playRandomSong"></audio>
             </div>
         </div>
         <nav>
@@ -30,10 +30,11 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
-            // 메뉴명 배열
             menulists: [
                 { menutext: "타점 계산", link: "/main" },
                 { menutext: "정보", link: "/info" },
@@ -48,19 +49,30 @@ export default {
             },
             Topclass: "",
             isPlaying: false,
-            audioSource: '/musics/cavatina.mp3', // 여기에 음악 파일 경로를 넣어주세요
-            originalTitle: 'MJ 타점계산기', // 원래 제목
-            scrollTitle: '', // 스크롤할 제목
+            audioSources: [],
+            currentAudioSource: {},
+            lastPlayedIndex: -1,
+            originalTitle: 'MJ 타점계산기',
+            scrollTitle: '',
         };
     },
-    mounted() {
-        // window.addEventListener("scroll", this.handleScroll);
+    async mounted() {
+        await this.loadMusicData();
+        this.currentAudioSource = this.getRandomSong();
     },
     beforeDestroy() {
         this.stopTitleScroll();
-        // window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
+        async loadMusicData() {
+            try {
+                const response = await axios.get('/config/music_list.json');
+                this.audioSources = response.data;
+                this.currentAudioSource = this.getRandomSong();
+            } catch (error) {
+                console.error('Error loading music data:', error);
+            }
+        },
         goToPage(target, index) {
             if (this.$router.currentRoute.path !== target) {
                 this.selectedIndex = index;
@@ -98,7 +110,8 @@ export default {
             this.isPlaying = !this.isPlaying;
         },
         startTitleScroll() {
-            const musicTitle = ' [ ♫ Cavatina ] Deer Hunter OST';
+            this.stopTitleScroll();  // 기존 인터벌 중지
+            const musicTitle = ` [ ♫ ${this.currentAudioSource.title} ]`;
             const padding = ' ···';
             this.scrollTitle = musicTitle + padding.repeat(5);
             let scrollIndex = 0;
@@ -106,11 +119,29 @@ export default {
             this.titleScrollInterval = setInterval(() => {
                 document.title = this.scrollTitle.substring(scrollIndex) + this.scrollTitle.substring(0, scrollIndex);
                 scrollIndex = (scrollIndex + 1) % this.scrollTitle.length;
-            }, 800); // 300ms마다 제목 변경
+            }, 800);
         },
         stopTitleScroll() {
             clearInterval(this.titleScrollInterval);
             document.title = this.originalTitle;
+        },
+        getRandomSong() {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * this.audioSources.length);
+            } while (randomIndex === this.lastPlayedIndex);
+
+            this.lastPlayedIndex = randomIndex;
+            return this.audioSources[randomIndex];
+        },
+        playRandomSong() {
+            this.currentAudioSource = this.getRandomSong();
+            this.startTitleScroll();
+            const audio = this.$refs.audio;
+            audio.load();
+            audio.onloadeddata = () => {
+                audio.play();
+            };
         }
     }
 };
@@ -121,7 +152,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; /* 로고 상자에 position: relative; 적용 */
+    position: relative;
 }
 
 .logobox {
@@ -133,18 +164,16 @@ export default {
     position: absolute;
     bottom: 10px;
     right: 20px;
-    z-index: 10; /* 다른 요소 위에 표시되도록 설정 */
-    display: flex; /* 요소가 제대로 표시되도록 설정 */
-    align-items: center; /* 요소를 수직으로 가운데 정렬 */
+    z-index: 10;
+    display: flex;
+    align-items: center;
 }
 
-/* 재생 아이콘의 색상 */
 .bi-play-circle-fill {
-    color: rgb(52, 7, 173); /* 재생 아이콘의 색상을 지정 */
+    color: rgb(52, 7, 173);
 }
 
-/* 정지 아이콘의 색상 */
 .bi-pause-circle-fill {
-    color: rgb(23, 54, 138); /* 정지 아이콘의 색상을 지정 */
+    color: rgb(23, 54, 138);
 }
 </style>
