@@ -1,5 +1,7 @@
 [
     { "title": "Cavatina - Deer Hunter OST", "src": "/musics/cavatina.mp3" },
     { "title": "MIC Drop - BTS", "src": "/musics/mic_drop.mp3" },
-    { "title": "You Are Not Alone - Michael Jackson", "src": "/musics/not_alone.mp3" }
+    { "title": "You Are Not Alone - Michael Jackson", "src": "/musics/not_alone.mp3" },
+    { "title": "사람이었네 - 루시드폴", "src": "/musics/human.mp3" },
+    { "title": "봉우리 - 김민기", "src": "/musics/mountaintop.mp3" }
 ]
