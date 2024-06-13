@@ -27,6 +27,22 @@
             </button>
             <label class="formatted-label-invest" @click="calcIsolatedMulti">{{ formattedInvestMoney }}</label>
         </div>
+        <div class="form-group risk-group">
+        <div class="risk-label-container">
+            <label class="risk-label">
+                <i class="bi bi-slash-circle-fill"></i> 리스크({{ selectedRisk }}%)
+            </label>
+            <label class="switch">
+                <input type="checkbox" v-model="tabsEnabled">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="risk-tabs" v-if="tabsEnabled">
+            <div :class="['tab', { 'active': selectedRisk === '10' }]" @click="selectRisk('10')">10%</div>
+            <div :class="['tab', { 'active': selectedRisk === '5' }]" @click="selectRisk('5')">5%</div>
+            <div :class="['tab', { 'active': selectedRisk === '3' }]" @click="selectRisk('3')">3%</div>
+        </div>
+    </div>
         <div class="calculate-button-container">
             <button class="calculate-button" @click="calcIsolatedMulti">
                 계산하기
@@ -61,7 +77,7 @@
                         </div>
                     </div>
                     <div class="calcdata">
-                        <label class="cate"><i class="bi bi-check-lg" />투자금(5%)</label>
+                        <label class="cate"><i class="bi bi-check-lg" />투자금({{ selectedRisk }}%)</label>
                         <label class="value">{{ formattedInvestRiskMoney }}</label>
                     </div>
                     <div class="spacer"></div>
@@ -110,6 +126,8 @@ export default {
             investMoney: "",
             submitted: false,
             riskRatio: 0.05,
+            selectedRisk: '5', // 기본값 설정
+            tabsEnabled: false, // 탭 활성화/비활성화 기본값 설정
             multiRatio: 1,
             investRiskMoney: 0,
             inputTotalMoney: 0,
@@ -250,7 +268,14 @@ export default {
                     this.calcIsolatedMulti();
                 }
             }
-        }
+        },
+        getTabClass(risk) {
+            return ['tab', { 'active': this.selectedRisk === risk }];
+        },
+        selectRisk(risk) {
+            this.selectedRisk = risk;
+            this.riskRatio = this.selectedRisk / 100;
+        },
     },
     computed: {
         formattedEntryPrice() {

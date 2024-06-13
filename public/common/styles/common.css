@@ -2089,6 +2089,155 @@ nav ul>li>button {
 }
 
 .Isolatedtooltip .tooltip-content img {
-    max-width: 200px; /* 이미지의 최대 너비 */
-    height: auto; /* 높이를 자동으로 조정 */
+    max-width: 200px;
+    height: auto;
+}
+
+/* .risk-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.risk-label {
+    margin-bottom: 0.1em;
+}
+
+.risk-tabs {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: none;
+    width: 180px;
+    border: 1px solid #ddd;
+}
+
+.risk-tabs .tab {
+    padding: 5px 5px;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    font-size: 10px;
+    width: 60px;
+}
+
+.risk-tabs .tab:not(:last-child) {
+    margin-right: 5px;
+}
+
+.risk-tabs .tab.active {
+    background-color: #f0f0f0;
+    font-weight: bold;
+} */
+
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+.risk-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #ddd; /* 경계선 추가 */
+    padding: 10px; /* 경계선 안쪽 여백 추가 */
+    border-radius: 5px; /* 모서리 둥글게 */
+}
+
+.risk-label-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.risk-label {
+    margin-right: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: rgb(224, 175, 101);;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.risk-tabs {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: none;
+    width: 270px;
+    padding-top: 5px;
+}
+
+.risk-tabs .tab {
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    text-align: center;
+    width: 90px;
+    background-color: rgb(248, 248, 248);
+}
+
+.risk-tabs .tab:not(:last-child) {
+    margin-right: 5px;
+}
+
+.risk-tabs .tab.active {
+    background-color: rgb(247, 228, 201);
+    font-weight: bold;
+    color: rgb(196, 99, 8);
+}
+
+.bi-slash-circle-fill{
+    color: rgb(224, 175, 101);
+}
+
+#entryprice > input{
+    width: 100px;
 }
