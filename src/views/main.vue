@@ -30,7 +30,8 @@
         <div class="form-group risk-group">
         <div class="risk-label-container">
             <label class="risk-label">
-                <i class="bi bi-slash-circle-fill"></i> 리스크({{ selectedRisk }}%)
+                <i class="bi bi-slash-circle-fill"></i> 리스크 설정
+                ( <span id="selectedRisk">{{ selectedRisk }}%</span> )
             </label>
             <label class="switch">
                 <input type="checkbox" v-model="tabsEnabled">
