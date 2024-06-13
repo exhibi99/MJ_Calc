@@ -1695,6 +1695,7 @@ nav ul>li>button {
     /* 수직 정렬 */
 }
 
+
 .entryprice,
 .lossprice {
     display: flex;
@@ -2238,6 +2239,9 @@ input:checked + .slider:before {
     color: rgb(224, 175, 101);
 }
 
-#entryprice > input{
-    width: 100px;
+.totalInvest .cate,
+.entryprice .cate,
+.lossprice .cate,
+.calcdata .cate{
+    width: 160px;
 }
