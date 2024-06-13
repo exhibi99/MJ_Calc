@@ -59,7 +59,7 @@
                 </div>
             </template>
             <div class="modalcontainer">
-                <div class="loginform">
+                <div class="investCalcForm">
                     <div class="entryprice">
                         <label class="cate"><i class="bi bi-check-lg" />진입가</label>
                         <label class="value">{{ formattedEntryPrice }}</label>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="btnwrap">
-                    <b-button variant="login" @click="closeCalcModal">확 인</b-button>
+                    <b-button variant="calcConfirm" @click="closeCalcModal">확 인</b-button>
                 </div>
             </div>
         </b-modal>
@@ -105,7 +105,7 @@
         <b-modal id="alertModal" class="modal" hide-footer ref="alertModal">
             <template #modal-title>
                 <div class="layertit">
-                    <i class="bi bi-exclamation-triangle-fill small-icon"></i>
+                    <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
                     <span class="alertInfo">알림</span>
                 </div>
             </template>

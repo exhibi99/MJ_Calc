@@ -1,7 +1,7 @@
 <template>
       <footer class="bg-light text-center py-3">
         <div class="footContainer">
-          <p> {{currentYear}}.{{currentMonth}}.{{currentDay}}_{{ver_data}} </p>
+          <p> {{ver_data}} </p>
         </div>
       </footer>
 </template>
@@ -13,7 +13,7 @@ export default {
         const currentDate = new Date();
 
         return{
-            ver_data: 'v001',
+            ver_data: '2024.06.13_v01',
 
             currentDate: currentDate,
             currentYear: currentDate.getFullYear(),

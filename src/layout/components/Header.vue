@@ -17,7 +17,7 @@
             </div>
         </div>
         <nav>
-            <div class="contentbox">
+            <div class="menubox">
                 <ul>
                     <li v-for="(item, index) in menulists" :key="index" v-on:click="goToPage(item.link, index)"
                         :class="{ selected: selectedIndex === index }">

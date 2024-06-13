@@ -294,8 +294,7 @@ button:focus {
     display: flex;
 }
 
-/* 7장 SPA 기본 골격 만들기 */
-.contentbox {
+.menubox {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -306,37 +305,10 @@ button:focus {
     padding: 5px 0;
 }
 
-.topmenu .contentbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .logo img {
     width: 65px;
 }
 
-.system>button::before {
-    content: "";
-    display: inline-block;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    margin: 0 4px;
-    background-color: #ddd;
-    vertical-align: middle;
-}
-
-.system>button:nth-of-type(1)::before {
-    display: none;
-}
-
-header {
-    position: relative;
-    z-index: 9999;
-}
-
-/* header::after { content: ""; display: block; width: 100%; height: 29px; background-color: #b31f28;position: absolute; left: 0; top: 80px;transform: rotate(1.5deg); box-shadow: 1px 5px 9px -3px rgb(50 50 50 / 75%); z-index: 2;} */
 #wrap {
     display: flex;
     flex-direction: column;
@@ -346,25 +318,6 @@ header {
 footer {
     margin-top: auto;
     position: relative;
-}
-
-.botinfo {
-    width: 100%;
-    height: 50px;
-    padding: 10px 0;
-    background: #ebebeb;
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-}
-
-.botbtngroup {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
 }
 
 .btn-text {
@@ -399,64 +352,6 @@ footer {
     color: #fff;
 }
 
-.footerinfo {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.footerinfo::before {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 35px;
-    background: url("/images/footer-bg.png") repeat-x;
-    position: absolute;
-    left: 0;
-    top: 50px;
-    z-index: 2;
-}
-
-.footer-logo,
-.footer-sub {
-    position: relative;
-    z-index: 3;
-}
-
-.footer-logo img {
-    width: 125px;
-}
-
-.footer-sub {
-    flex: 1;
-    padding-left: 20px;
-    font-size: 12px;
-}
-
-@media screen and (max-width: 1024px) {
-    .system>button {
-        width: 25px;
-        height: 25px;
-        font-size: 0;
-    }
-
-    .system>button::before {
-        display: none;
-    }
-
-    .system>button:nth-of-type(1) {
-        background: url("/images/icon-login.svg") no-repeat 0 0/100%;
-        margin-right: 15px;
-    }
-
-    .system>button:nth-of-type(2) {
-        background: url("/images/icon-member.svg") no-repeat 0 0/100%;
-    }
-}
-
 @media screen and (max-width: 767px) {
     nav ul>li {
         flex: auto;
@@ -469,25 +364,6 @@ footer {
 
     nav ul>li>button {
         font-size: 15px;
-    }
-
-    .botinfo {
-        height: auto;
-        padding: 0 30px;
-    }
-
-    .botbtngroup {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px 0;
-    }
-
-    .footerinfo {
-        position: relative;
-    }
-
-    .footerinfo::before {
-        top: 0;
     }
 
     .btn-text {
@@ -505,22 +381,8 @@ footer {
     .btn-text+.btn-gray {
         margin-left: 0;
     }
-
-    .footer-logo img {
-        width: 85px;
-    }
-
-    .footer-logo {
-        align-self: flex-start;
-        padding-top: 4px;
-    }
-
-    .footer-info address span {
-        display: block;
-    }
 }
 
-/* 8장 로그인/회원가입 대화 상자 만들기 */
 .modal-open #appPage {
     z-index: 9;
     position: relative;
@@ -544,17 +406,6 @@ footer {
     margin-right: 5px;
 }
 
-
-.form-control {
-    height: 40px;
-    color: #676767;
-    font-size: 14px;
-}
-
-.form-control::placeholder {
-    color: #ddd;
-}
-
 .btnwrap {
     margin-top: 30px;
 }
@@ -569,45 +420,9 @@ footer {
     text-align: center;
 }
 
-.btn-login {
+.btn-calcConfirm {
     background: #17a2b8;
     color: #fff;
-}
-
-/* 9장 메인 콘텐츠 만들기 */
-.mainbanner {
-    height: 350px;
-    overflow: hidden;
-    text-align: center;
-}
-
-.mainbanner>img {
-    height: 350px;
-}
-
-.newbook {
-    background: url("/images/content_bg.png") repeat-x;
-    padding: 40px 0;
-}
-
-.maintit {
-    margin-bottom: 20px;
-    font-size: 38px;
-    color: #222;
-    font-weight: 900;
-    text-align: center;
-}
-
-.maintit>span {
-    display: block;
-    margin-top: 10px;
-    font-size: 18px;
-    color: #ababab;
-}
-
-.tapcontent {
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .tap {
@@ -691,19 +506,6 @@ footer {
 }
 
 @media screen and (max-width: 767px) {
-    .tapcontent {
-        padding: 0 10px;
-    }
-
-    .maintit {
-        font-size: 26px;
-    }
-
-    .maintit>span {
-        font-size: 14px;
-        margin-top: 0px;
-    }
-
     .tap {
         margin: 20px 0;
     }
@@ -1117,349 +919,6 @@ header.scrollTop::after {
     border-radius: 0;
 }
 
-.bookbtns .btn-lightgray .bi::after {
-    margin: -2px 2px 0 0;
-}
-
-.bookbtns .btn-lightgray {
-    width: 49%;
-}
-
-.infolist {
-    flex: 1;
-    padding: 0 20px;
-}
-
-.infolist li {
-    margin-bottom: 22px;
-    font-size: 16px;
-}
-
-.infolist li .label,
-.infolist li .infocontent {
-    display: inline-block;
-}
-
-.infolist li .label {
-    width: 150px;
-    font-weight: 900;
-    padding-left: 20px;
-    position: relative;
-}
-
-.infolist li .infocontent {
-    color: #222;
-}
-
-.infolist li .label::after {
-    content: "";
-    display: block;
-    width: 18px;
-    height: 18px;
-    background: url("/images/file-text.svg") no-repeat left center/100%;
-    opacity: 0.3;
-    position: absolute;
-    left: 0;
-    top: 4px;
-}
-
-@media screen and (max-width: 767px) {
-    .book-info {
-        display: block;
-        padding: 20px 0;
-    }
-
-    .titlebar>h1 {
-        font-size: 20px;
-    }
-
-    .imgview {
-        margin: 0 auto;
-    }
-
-    .infolist {
-        padding: 0;
-        margin-top: 20px;
-    }
-
-    .infolist li {
-        font-size: 14px;
-    }
-
-    .infolist li .label {
-        width: 90px;
-    }
-
-    .infolist li .label::after {
-        width: 14px;
-        height: 14px;
-        top: 3px;
-    }
-}
-
-.detailTap {
-    display: flex;
-}
-
-.detailTap .btn-group-toggle {
-    flex: 1 1 auto;
-    height: 40px;
-    border-left: solid 1px #ddd;
-    background-color: #eaeaea;
-}
-
-.btn-detailtap {
-    color: #aeaeae;
-    font-size: 14px;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 0;
-}
-
-.btn-detailtap .bi::before {
-    margin: -2px 2px 0 0;
-}
-
-.detailTap .btn-group-toggle:nth-of-type(1) {
-    border-left: none;
-}
-
-.btn-detailtap.active {
-    background-color: #606060;
-    color: #fff;
-}
-
-@media screen and (max-width: 767px) {
-    .detailTap {
-        flex-wrap: wrap;
-    }
-
-    .detailTap .btn-group-toggle {
-        flex-basis: 33.3%;
-        flex-shrink: 0;
-    }
-
-    .detailTap .btn-group-toggle:nth-of-type(4) {
-        border-left: none;
-    }
-}
-
-.detailTapCon {
-    padding: 30px;
-}
-
-.tapcontit {
-    margin-bottom: 20px;
-    font-size: 18px;
-    color: #7952b3;
-    font-weight: 900;
-}
-
-.tapcontit>strong {
-    color: #7952b3;
-    font-size: 24px;
-    font-weight: 900;
-}
-
-.detailTapCon>P {
-    margin-bottom: 20px;
-}
-
-@media screen and (max-width: 767px) {
-    .detailTapCon {
-        padding: 20px 0;
-    }
-
-    .tapcontit,
-    .tapcontit>strong {
-        font-size: 15px;
-    }
-}
-
-.bookpage .rollimg.active .imgbox {
-    display: block;
-    border: solid 3px #d1e0e5;
-}
-
-/* 12 SPA 완성하기 */
-.subpageguide {
-    margin-bottom: 30px;
-    color: #ababab;
-}
-
-.listnum strong {
-    color: #dc3545;
-}
-
-.listbox {
-    margin-top: 20px;
-    padding: 20px;
-    border: solid 1px #ddd;
-}
-
-.listitem {
-    display: flex;
-    margin-top: 30px;
-    padding-bottom: 20px;
-    border-bottom: solid 1px #ddd;
-}
-
-.listitem:nth-of-type(1) {
-    margin-top: 0;
-}
-
-.listthum {
-    width: 160px;
-}
-
-.listthum img {
-    max-width: 100%;
-}
-
-.listdetail {
-    flex: 1;
-    padding: 10px 0 0 40px;
-}
-
-.listdetail>strong {
-    display: block;
-    margin-bottom: 10px;
-    padding: 0 0 10px;
-    border-bottom: solid 1px #ddd;
-    font-size: 20px;
-    color: #dd868a;
-}
-
-.listdate {
-    text-align: right;
-    color: #ababab;
-    font-size: 13px;
-}
-
-.itembtns {
-    margin: 10px 0 20px;
-}
-
-.btn-listdown {
-    display: inline-block;
-    height: 30px;
-    padding: 0 20px;
-    margin-right: 10px;
-    min-width: 140px;
-    font-size: 14px;
-    background-color: #dd868a;
-    color: #fff;
-    width: auto;
-    border-radius: 0;
-    line-height: 28px;
-}
-
-.btn-listdown .bi::before {
-    margin-top: -2px;
-}
-
-.downguide {
-    color: #ababab;
-    font-size: 12px;
-}
-
-@media screen and (max-width: 767px) {
-    .listitem {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .listthum {
-        height: 160px;
-    }
-
-    .listdetail {
-        padding-left: 0;
-    }
-}
-
-.movieclasspage .listnum strong,
-.movieclasspage .listdetail>strong {
-    color: #7952b3;
-}
-
-.movieclasspage .btn-listdown {
-    background-color: #7952b3;
-}
-
-.classsample .form-group:nth-of-type(1) {
-    padding-right: 0;
-}
-
-.classsample .form-group {
-    display: flex;
-}
-
-.classsample form {
-    max-width: 480px;
-    margin: 0 auto;
-}
-
-.classsample .form-group>label {
-    flex-basis: 130px;
-}
-
-.classsample .form-group>div {
-    flex: 1 1 0;
-}
-
-.classsample .form-group input.form-control {
-    height: 30px;
-}
-
-.classsample .form-group small {
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.introcon {
-    background: url("/images/main_ico2.png") no-repeat right 10px/190px;
-}
-
-.introgroup {
-    padding-right: 300px;
-    margin-bottom: 30px;
-}
-
-.introgroup strong {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 25px;
-    font-weight: 900;
-    color: #222;
-}
-
-.introgroup:nth-of-type(2) {
-    background: url("/images/main_ico1.png") no-repeat left 0px/ 200px;
-    padding: 0 0 0 300px;
-}
-
-@media screen and (max-width: 767px) {
-    .introcon {
-        background: none;
-    }
-
-    .introgroup {
-        padding-right: 0;
-    }
-
-    .introgroup strong {
-        font-size: 18px;
-    }
-
-    .introgroup:nth-of-type(2) {
-        background: url("/images/main_ico1.png") no-repeat center 0px/ 200px;
-        padding: 193px 0 0 0px;
-    }
-}
-
-
 nav {
     padding: 8px 0;
     background-color: #053063;
@@ -1499,46 +958,6 @@ nav ul>li>button {
     padding: 20px;
 }
 
-
-
-
-.submit-btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-
-/* .form-group .d-block { margin-bottom: 10px; font-size: 16px; }
-.form-group:nth-of-type(1) { padding-right: 80px; position: relative; }
-.form-group:nth-of-type(1) input + button { width: 75px; height: 40px; border: solid 1px #ddd; border-radius: 0; background: #eee; font-size: 14px; position: absolute; right: 0; bottom: 28px; }
-.form-group .form-text { display: block; padding: 0 20px; margin: 10px 0 0 10px; font-size: 12px; color: #17a2b8 !important; opacity: 0.6;position: relative; }
-.form-group .form-text::after { content: ""; display: block; width: 20px; height: 20px; background: url("/images/pencil.svg") no-repeat left center; opacity: 0.4; position: absolute; left: 0; top: 0; }
-.form-group .custom-control { display: inline-block; margin: 0 15px 0 20px; } */
-.btnwrap.half {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-}
-
-.btn-cancel {
-    background: #d5d5d5;
-}
-
-.btnwrap.half .btn {
-    flex-basis: 49%;
-}
-
-/* .form-group .d-block::before { content: "\F6766";display: inline-block; margin: -5px 3px 0 0; vertical-align: middle; font-family: bootstrap-icons !important; }
-.form-group:nth-of-type(1) .d-block::before { content: "\F676"; }
-.form-group:nth-of-type(2) .d-block::before { content: "\F47A"; }
-.form-group:nth-of-type(3) .d-block::before { content: "\F68B"; }
-.form-group:nth-of-type(4) .d-block::before { content: "\F890";} */
-
 .bi-exclamation-circle-fill {
     color: rgb(214, 60, 40);
 }
@@ -1565,16 +984,10 @@ nav ul>li>button {
     font-size: 24px !important;
 }
 
-/* 입력 폼 스타일 */
-
-
-
-/* 아이콘 스타일 */
 .bi {
     font-size: 1.5em;
     margin-right: 5px;
 }
-
 
 .form-group {
     margin-bottom: 20px;
@@ -1582,30 +995,22 @@ nav ul>li>button {
     border: 1px solid #ccc;
     border-radius: 5px;
     display: flex;
-    /* 폼 그룹을 플렉스 박스로 설정하여 아이템을 가로로 정렬합니다. */
     align-items: center;
-    /* 수직으로 가운데 정렬합니다. */
 }
 
 .form-group label {
     display: flex;
     align-items: center;
     margin-right: 10px;
-    /* 라벨과 입력 요소 사이의 간격을 조절합니다. */
     font-weight: bold;
     color: #333;
     flex: 0 0 auto;
-    /* 자동으로 확장되지 않도록 설정합니다. */
 }
-
-
 
 .form-group input[type="number"]::-webkit-outer-spin-button,
 .form-group input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    /* Safari and Chrome */
     margin: 0;
-    /* Safari and Chrome */
 }
 
 .calculate-button-container {
@@ -1635,45 +1040,7 @@ nav ul>li>button {
     transform: scale(0.98);
 }
 
-
-
-
-.close-button {
-    background-color: #ccc;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    color: #333;
-    cursor: pointer;
-}
-
-.close-button:hover {
-    background-color: #999;
-    color: white;
-}
-
-.copy-text {
-    cursor: pointer;
-    color: #007bff;
-    /* 링크 색상 */
-    text-decoration: underline;
-    /* 밑줄 추가 */
-}
-
-.copy-text:hover {
-    color: #0056b3;
-    /* 링크 호버 색상 */
-}
-
-.model-body {
-    padding: 0;
-}
-
-/* .modal-body {
-     margin-bottom: 10px;
-   } */
-
-.loginform label {
+.investCalcForm label {
     display: inline-block;
     margin: 0px 0px;
     font-weight: 700;
@@ -1684,39 +1051,29 @@ nav ul>li>button {
     /* 수직 정렬 */
 }
 
-.entryprice .cate,
-.lossprice .cate {
-    width: 120px;
-    /* 원하는 width 값으로 변경 */
-    height: 50px;
-    display: flex;
-    /* 블록 요소로 설정하여 너비 적용 */
-    align-items: center;
-    /* 수직 정렬 */
-}
-
-
 .entryprice,
 .lossprice {
     display: flex;
     align-items: center;
-    /*margin-bottom: 10px;  각 라벨 사이에 간격을 줍니다 */
     justify-content: space-between;
+}
+
+.entryprice .cate,
+.lossprice .cate {
+    width: 120px;
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 .entryprice .value,
 .lossprice .value {
     width: 150px;
-    /* 원하는 width 값으로 변경 */
     height: 36px;
     display: inline-block;
-    /* 블록 요소로 설정하여 너비 적용 */
     line-height: 36px;
-    /* 높이에 맞춰 수직 가운데 정렬 */
     text-align: center;
-    /*가로 가운데 정렬 */
     align-items: center;
-    /* 수직 정렬 */
     justify-content: center;
 }
 
@@ -1728,38 +1085,11 @@ nav ul>li>button {
     color: rgb(169, 36, 36);
 }
 
-.value {
-    /* 필요한 스타일 */
-    margin-right: 10px;
-    /* 버튼과 간격을 줍니다 */
-}
-
-.copy-button {
-    padding: 8px 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1e56ce;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    /* 수직 정렬 */
-    width: 80px;
-    justify-content: center;
-}
-
-.copy-button:hover {
-    background-color: #163a99;
-}
-
 .cate i {
     font-size: 14px !important;
-    /* 원하는 아이콘 크기로 설정 */
     width: 14px !important;
     height: 14px !important;
     align-items: center;
-    /* 수직 정렬 */
     display: flex;
 }
 
@@ -1773,7 +1103,6 @@ nav ul>li>button {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* 반투명한 배경 */
 }
 
 .modal-container {
@@ -1786,11 +1115,8 @@ nav ul>li>button {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* 반투명한 배경 */
     z-index: 1000;
-    /* 다른 요소들보다 위에 배치되도록 설정 */
 }
-
 
 .modal-content {
     display: flex;
@@ -1809,44 +1135,30 @@ nav ul>li>button {
     display: flex;
 }
 
-
-
-
+.totalInvest {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 0, 0.662);
+    border-radius: 3%;
+}
 
 .totalInvest .cate {
     width: 120px;
-    /* 원하는 width 값으로 변경 */
     height: 50px;
     display: flex;
-    /* 블록 요소로 설정하여 너비 적용 */
     align-items: center;
-    /* 수직 정렬 */
     font-weight: bold;
     color: #14399c;
 }
 
-.totalInvest {
-    display: flex;
-    align-items: center;
-    /*margin-bottom: 10px;  각 라벨 사이에 간격을 줍니다 */
-    justify-content: space-between;
-    background: rgba(255, 255, 0, 0.662);
-    /* margin-top: 20px; */
-    border-radius: 3%;
-}
-
 .totalInvest .value {
     width: 150px;
-    /* 원하는 width 값으로 변경 */
     height: 36px;
     display: inline-block;
-    /* 블록 요소로 설정하여 너비 적용 */
     line-height: 36px;
-    /* 높이에 맞춰 수직 가운데 정렬 */
     text-align: center;
-    /*가로 가운데 정렬 */
     align-items: center;
-    /* 수직 정렬 */
     justify-content: center;
 
     font-weight: bold;
@@ -1856,54 +1168,35 @@ nav ul>li>button {
 
 .spacer {
     margin-bottom: 20px;
-    /* Adjust the space as needed */
     border-top: 2px solid #ccc;
-    /* Add a horizontal line */
     margin-top: 20px;
-    /* Add some top margin for spacing */
-}
-
-
-.calcdata .cate {
-    width: 120px;
-    /* 원하는 width 값으로 변경 */
-    height: 50px;
-    display: flex;
-    /* 블록 요소로 설정하여 너비 적용 */
-    align-items: center;
-    /* 수직 정렬 */
 }
 
 .calcdata {
     display: flex;
     align-items: center;
-    /*margin-bottom: 10px;  각 라벨 사이에 간격을 줍니다 */
     justify-content: space-between;
+}
+
+.calcdata .cate {
+    width: 120px;
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 .calcdata .value {
     width: 150px;
-    /* 원하는 width 값으로 변경 */
     height: 36px;
     display: inline-block;
-    /* 블록 요소로 설정하여 너비 적용 */
     line-height: 36px;
-    /* 높이에 맞춰 수직 가운데 정렬 */
     text-align: center;
-    /*가로 가운데 정렬 */
     align-items: center;
-    /* 수직 정렬 */
     justify-content: center;
 }
 
-
 .modal-content {
     margin: 0 auto;
-}
-
-.input-container {
-    position: relative;
-    display: inline-block;
 }
 
 .clear-icon {
@@ -1913,13 +1206,10 @@ nav ul>li>button {
     cursor: pointer;
     margin-left: 3px;
     font-size: 10px;
-    /* 아이콘 크기 조정 */
 }
 
 .form-group input[type="number"] {
-    /* flex: 1; 입력 요소가 남은 공간을 모두 차지하도록 설정합니다. */
     width: 40%;
-    /* 입력 요소의 너비를 50%로 설정합니다. */
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -1987,18 +1277,15 @@ nav ul>li>button {
 
 .linkData {
     color: rgb(86, 83, 163);
-    /* Change the link color to red */
     text-align: left;
 }
 
 .info-header {
     margin-top: 30px;
-    /* Adjust the top margin as needed */
 }
 
 .infoTitle {
     color: rgb(20, 24, 91) !important;
-    /* Change the link color to red */
     text-align: left;
     padding-bottom: 10px;
     font-size: 17px;
@@ -2012,7 +1299,7 @@ nav ul>li>button {
     justify-content: center;
 }
 
-.footContainer > P{
+.footContainer > P {
     font-size: 10px;
 }
 
@@ -2022,71 +1309,64 @@ nav ul>li>button {
     margin-left: 10px;
 }
 
-/* .container {
-  display: flex;
-  align-items: center;
-} */
-
 .buyShortImg img {
     width: 70px;
-    /* 이미지 너비를 조정 */
     height: auto;
-    /* 이미지의 비율을 유지하면서 높이 자동 조정 */
     border-radius: 8%;
 }
 
-.small-icon {
-    font-size: 1.0rem; /* 원하는 크기로 조정 */
+.alert-icon {
+    font-size: 1.0rem;
     color: rgb(143, 25, 25);
 }
-.alertInfo{
+
+.alertInfo {
     font-size: 18px;
     color: rgb(143, 73, 33);
 }
 
-.alertMessage > label{
+.alertMessage>label {
     font-size: 16px;
     color: rgb(40, 53, 134);
     padding-top: 10px;
     font-weight: bold;
 }
+
 .calctooltip {
     position: absolute;
     top: 140px;
     left: 80px;
-    width: 200px; /* 말풍선의 너비 조정 */
+    width: 200px;
     background-color: transparent;
     z-index: 99999;
 }
 
 .calctooltip .tooltip-content {
-    background-color: transparent; /* 흰색 배경 설정 */
+    background-color: transparent;
     border: none;
-    border-radius: 8px; /* 모서리 둥글게 */
+    border-radius: 8px;
     position: relative;
-    /*box-shadow: 0 2px 4px rgba(0,0,0,0.2);  그림자 효과 추가 */
 }
 
 .calctooltip .tooltip-content img {
-    max-width: 200px; /* 이미지의 최대 너비 */
-    height: auto; /* 높이를 자동으로 조정 */
+    max-width: 200px;
+    height: auto;
 }
 
 .Isolatedtooltip {
     position: absolute;
     top: 340px;
     left: 80px;
-    width: 200px; /* 말풍선의 너비 조정 */
+    width: 200px;
     background-color: transparent;
     z-index: 99999;
 }
 
 .Isolatedtooltip .tooltip-content {
-    background-color: transparent; /* 흰색 배경 설정 */
+    background-color: transparent;
     border: none;
-    border-radius: 8px; /* 모서리 둥글게 */
+    border-radius: 8px;
     position: relative;
-    /*box-shadow: 0 2px 4px rgba(0,0,0,0.2);  그림자 효과 추가 */
 }
 
 .Isolatedtooltip .tooltip-content img {
@@ -2094,54 +1374,13 @@ nav ul>li>button {
     height: auto;
 }
 
-/* .risk-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.risk-label {
-    margin-bottom: 0.1em;
-}
-
-.risk-tabs {
-    display: flex;
-    justify-content: flex-end;
-    border-bottom: none;
-    width: 180px;
-    border: 1px solid #ddd;
-}
-
-.risk-tabs .tab {
-    padding: 5px 5px;
-    cursor: pointer;
-    border: none;
-    text-align: center;
-    font-size: 10px;
-    width: 60px;
-}
-
-.risk-tabs .tab:not(:last-child) {
-    margin-right: 5px;
-}
-
-.risk-tabs .tab.active {
-    background-color: #f0f0f0;
-    font-weight: bold;
-} */
-
-.form-group {
-    margin-bottom: 1.5em;
-}
-
 .risk-group {
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 1px solid #ddd; /* 경계선 추가 */
-    padding: 10px; /* 경계선 안쪽 여백 추가 */
-    border-radius: 5px; /* 모서리 둥글게 */
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .risk-label-container {
@@ -2192,11 +1431,12 @@ nav ul>li>button {
     border-radius: 50%;
 }
 
-input:checked + .slider {
-    background-color: rgb(224, 175, 101);;
+input:checked+.slider {
+    background-color: rgb(224, 175, 101);
+    ;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(14px);
 }
 
@@ -2236,14 +1476,14 @@ input:checked + .slider:before {
     color: rgb(196, 99, 8);
 }
 
-.bi-slash-circle-fill{
+.bi-slash-circle-fill {
     color: rgb(224, 175, 101);
 }
 
 .totalInvest .cate,
 .entryprice .cate,
 .lossprice .cate,
-.calcdata .cate{
+.calcdata .cate {
     width: 160px;
 }
 

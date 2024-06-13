@@ -9,7 +9,4 @@
 ::-webkit-scrollbar {
     display: none;
 }
-
-/* Firefox 우측 스크롤바 감추기 */
-scrollbar-width: none;
 </style>
