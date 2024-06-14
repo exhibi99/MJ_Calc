@@ -18,7 +18,8 @@
                         <i class="bi bi-list-ul"></i>
                     </button>
                     <ul ref="dropdownMenu" class="dropdown-menu" :class="{ 'show': dropdownOpen }"
-                        :style="{ right: dropdownXPosition + 'px' }">
+                        :style="{ right: dropdownXPosition + 'px' }" @mouseover="clearDropdownTimeout"
+                        @mouseleave="startDropdownTimeout">
                         <li v-for="(song, index) in audioSources" :key="index" @click="selectSong(song)">
                             · {{ song.title }}
                         </li>
@@ -67,6 +68,7 @@ export default {
             scrollTitle: '',
             dropdownOpen: false,
             dropdownXPosition: 0,
+            dropdownTimeout: null,
         };
     },
     async mounted() {
@@ -162,6 +164,21 @@ export default {
             this.dropdownOpen = !this.dropdownOpen;
             if (this.dropdownOpen) {
                 this.calculateDropdownPosition();
+                this.startDropdownTimeout();
+            } else {
+                this.clearDropdownTimeout();
+            }
+        },
+        startDropdownTimeout() {
+            this.clearDropdownTimeout();
+            this.dropdownTimeout = setTimeout(() => {
+                this.dropdownOpen = false;
+            }, 5000);
+        },
+        clearDropdownTimeout() {
+            if (this.dropdownTimeout) {
+                clearTimeout(this.dropdownTimeout);
+                this.dropdownTimeout = null;
             }
         },
         calculateDropdownPosition() {
@@ -172,6 +189,7 @@ export default {
         selectSong(song) {
             this.currentAudioSource = song;
             this.dropdownOpen = false;
+            this.clearDropdownTimeout();
             const audio = this.$refs.audio;
             audio.load();
             audio.onloadeddata = () => {
@@ -184,6 +202,7 @@ export default {
             if (this.$refs.dropdownMenu) {
                 if (!this.$refs.dropdownMenu.contains(event.target)) {
                     this.dropdownOpen = false;
+                    this.clearDropdownTimeout();
                 }
             }
         }
@@ -207,7 +226,7 @@ export default {
 .music {
     position: absolute;
     bottom: 10px;
-    right: 20px;
+    right: 10px;
     z-index: 30;
     display: flex;
     align-items: center;
@@ -216,12 +235,14 @@ export default {
 .dropdown {
     position: relative;
     display: flex;
-    justify-content: center;  /* 수평 중앙 정렬 */
-    align-items: center;  /* 수직 중앙 정렬 */
+    justify-content: center;
+    /* 수평 중앙 정렬 */
+    align-items: center;
+    /* 수직 중앙 정렬 */
 
     width: 23px;
     height: 27px;
-    margin: 1px 0px 0px 5px;
+    margin: 1px 0px 0px 7px;
 }
 
 .musiclist {
@@ -261,7 +282,8 @@ export default {
     text-overflow: ellipsis;
     color: rgb(99, 117, 150);
     font-weight: bold;
-    position: relative; /* 부모 요소 기준으로 position 설정 */
+    position: relative;
+    /* 부모 요소 기준으로 position 설정 */
 }
 
 /* 마지막 항목의 구분선 제거 */

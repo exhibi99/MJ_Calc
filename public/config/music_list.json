@@ -4,5 +4,8 @@
     { "title": "You Are Not Alone - Michael Jackson", "src": "/musics/not_alone.mp3" },
     { "title": "사람이었네 - 루시드폴", "src": "/musics/human.mp3" },
     { "title": "봉우리 - 김민기", "src": "/musics/mountaintop.mp3" },
-    { "title": "내 낡은 서랍 속의 바다 - Panic", "src": "/musics/see_drawer.mp3" }
+    { "title": "내 낡은 서랍 속의 바다 - Panic", "src": "/musics/see_drawer.mp3" },
+    { "title": "나에게 쓰는 편지 - 신해철", "src": "/musics/letter_to_me.mp3" },
+    { "title": "세상에 뿌려진 사랑만큼 - 이승환", "src": "/musics/world_love.mp3" },
+    { "title": "고독한 항해 - 김동률", "src": "/musics/solitary_voyage.mp3" }
 ]
