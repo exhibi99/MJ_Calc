@@ -181,12 +181,11 @@ export default {
             };
         },
         onDropdownClickOutside(event) {
-            console.log('onDropdownClickOutside ---> Enter')
-            if (this.$refs.dropdownMenu){
-             if(!this.$refs.dropdownMenu.contains(event.target)) {
-                this.dropdownOpen = false;
+            if (this.$refs.dropdownMenu) {
+                if (!this.$refs.dropdownMenu.contains(event.target)) {
+                    this.dropdownOpen = false;
+                }
             }
-        }
         }
     }
 };
@@ -239,9 +238,9 @@ export default {
 .dropdown-menu {
     position: absolute;
     font-size: 10px;
-    left: -90px;
-    background-color: #edf5f7;
-    min-width: 130px;
+    left: -140px;
+    background-color: #f7f8f8;
+    min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(42, 129, 241, 0.699);
     z-index: 1;
     display: none;
@@ -257,11 +256,28 @@ export default {
 .dropdown-menu li {
     padding: 12px 16px;
     cursor: pointer;
-    white-space: nowrap; /* 줄바꿈 방지 */
-    overflow: hidden; /* 넘친 내용 숨기기 */
-    text-overflow: ellipsis; /* 말줄임표 추가 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: rgb(99, 117, 150);
     font-weight: bold;
+    position: relative; /* 부모 요소 기준으로 position 설정 */
+}
+
+/* 마지막 항목의 구분선 제거 */
+.dropdown-menu li:last-child::after {
+    background-color: transparent;
+}
+
+/* 80%의 너비를 갖는 bottom 라인 */
+.dropdown-menu li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background-color: #cbd0fd;
 }
 
 .dropdown-menu li:hover {
