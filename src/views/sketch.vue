@@ -110,7 +110,7 @@ export default {
     background-color: rgba(32, 175, 168, 0.15);
     padding: 20px;
     border-radius: 5px;
-    z-index: 999;
+    z-index: 20;
 }
 
 .random-gif {

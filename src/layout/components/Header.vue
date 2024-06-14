@@ -72,9 +72,11 @@ export default {
     async mounted() {
         await this.loadMusicData();
         this.currentAudioSource = this.getRandomSong();
+        document.addEventListener('mousedown', this.onDropdownClickOutside);
     },
     beforeDestroy() {
         this.stopTitleScroll();
+        document.removeEventListener('mousedown', this.onDropdownClickOutside);
     },
     methods: {
         async loadMusicData() {
@@ -177,6 +179,14 @@ export default {
                 this.isPlaying = true;
                 this.startTitleScroll();
             };
+        },
+        onDropdownClickOutside(event) {
+            console.log('onDropdownClickOutside ---> Enter')
+            if (this.$refs.dropdownMenu){
+             if(!this.$refs.dropdownMenu.contains(event.target)) {
+                this.dropdownOpen = false;
+            }
+        }
         }
     }
 };
@@ -199,7 +209,7 @@ export default {
     position: absolute;
     bottom: 10px;
     right: 20px;
-    z-index: 10;
+    z-index: 30;
     display: flex;
     align-items: center;
 }
