@@ -20,8 +20,13 @@
                     <ul ref="dropdownMenu" class="dropdown-menu" :class="{ 'show': dropdownOpen }"
                         :style="{ right: dropdownXPosition + 'px' }" @mouseover="clearDropdownTimeout"
                         @mouseleave="startDropdownTimeout">
-                        <li v-for="(song, index) in audioSources" :key="index" @click="selectSong(song)">
+                        <li v-for="(song, index) in paginatedAudioSources" :key="index" @click="selectSong(song)">
                             · {{ song.title }}
+                        </li>
+                        <li class="pagination-controls">
+                            <button @click="prevPage" :disabled="currentPage === 1">이전</button>
+                            <span>{{ currentPage }} / {{ totalPages }}</span>
+                            <button @click="nextPage" :disabled="currentPage === totalPages">다음</button>
                         </li>
                     </ul>
                 </span>
@@ -69,6 +74,8 @@ export default {
             dropdownOpen: false,
             dropdownXPosition: 0,
             dropdownTimeout: null,
+            currentPage: 1,
+            itemsPerPage: 8,
         };
     },
     async mounted() {
@@ -80,6 +87,16 @@ export default {
         this.stopTitleScroll();
         document.removeEventListener('mousedown', this.onDropdownClickOutside);
     },
+    computed: {
+        paginatedAudioSources() {
+            const start = (this.currentPage - 1) * this.itemsPerPage;
+            const end = start + this.itemsPerPage;
+            return this.audioSources.slice(start, end);
+        },
+        totalPages() {
+            return Math.ceil(this.audioSources.length / this.itemsPerPage);
+        }
+    },
     methods: {
         async loadMusicData() {
             try {
@@ -87,7 +104,7 @@ export default {
                 this.audioSources = response.data;
                 this.currentAudioSource = this.getRandomSong();
             } catch (error) {
-                console.error('Error loading music data:', error);
+                console.error('음악 데이터를 불러오는 중 오류 발생:', error);
             }
         },
         goToPage(target, index) {
@@ -127,7 +144,7 @@ export default {
             this.isPlaying = !this.isPlaying;
         },
         startTitleScroll() {
-            this.stopTitleScroll();  // 기존 인터벌 중지
+            this.stopTitleScroll();
             const musicTitle = ` [ ♫ ${this.currentAudioSource.title} ]`;
             const padding = ' ···';
             this.scrollTitle = musicTitle + padding.repeat(5);
@@ -184,7 +201,7 @@ export default {
         calculateDropdownPosition() {
             const dropdownWidth = this.$refs.dropdownMenu.clientWidth;
             const screenWidth = window.innerWidth;
-            this.dropdownXPosition = screenWidth - dropdownWidth - 20; // 여유 공간을 두어 화면을 벗어나지 않도록 함
+            this.dropdownXPosition = screenWidth - dropdownWidth - 20;
         },
         selectSong(song) {
             this.currentAudioSource = song;
@@ -204,6 +221,16 @@ export default {
                     this.dropdownOpen = false;
                     this.clearDropdownTimeout();
                 }
+            }
+        },
+        prevPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
             }
         }
     }
@@ -236,10 +263,7 @@ export default {
     position: relative;
     display: flex;
     justify-content: center;
-    /* 수평 중앙 정렬 */
     align-items: center;
-    /* 수직 중앙 정렬 */
-
     width: 23px;
     height: 27px;
     margin: 1px 0px 0px 7px;
@@ -271,7 +295,6 @@ export default {
 
 .dropdown-menu.show {
     display: block;
-    /* 드롭다운 메뉴가 표시될 때 보이도록 함 */
 }
 
 .dropdown-menu li {
@@ -283,15 +306,12 @@ export default {
     color: rgb(99, 117, 150);
     font-weight: bold;
     position: relative;
-    /* 부모 요소 기준으로 position 설정 */
 }
 
-/* 마지막 항목의 구분선 제거 */
 .dropdown-menu li:last-child::after {
     background-color: transparent;
 }
 
-/* 80%의 너비를 갖는 bottom 라인 */
 .dropdown-menu li::after {
     content: '';
     position: absolute;
@@ -318,4 +338,37 @@ export default {
 .bi-list-ul {
     color: rgb(23, 54, 138);
 }
+
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #cde5f5;
+    /* border-top: 1px solid #ccc; */
+    border-radius: 5%;
+}
+
+.pagination-controls button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #458ddb;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.pagination-controls button:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+
+/* PC 화면에서 이미지 크기 설정 */
+@media only screen and (min-width: 768px) {
+    .dropdown-menu {
+        left: -220px;
+        min-width: 260px;
+    }
+}
+
 </style>
