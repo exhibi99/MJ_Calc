@@ -30,7 +30,7 @@
                         </li>
                     </ul>
                 </span>
-                <audio ref="audio" :src="currentAudioSource.src" @ended="playRandomSong"></audio>
+                <audio ref="audio" :src="currentAudioSource.src" @ended="playNextSong"></audio>
             </div>
         </div>
         <nav>
@@ -76,11 +76,14 @@ export default {
             dropdownTimeout: null,
             currentPage: 1,
             itemsPerPage: 8,
+            shuffledIndices: [],
+            currentIndex: 0,
         };
     },
     async mounted() {
         await this.loadMusicData();
-        this.currentAudioSource = this.getRandomSong();
+        this.shuffleSongs();
+        this.currentAudioSource = this.audioSources[this.shuffledIndices[this.currentIndex]];
         document.addEventListener('mousedown', this.onDropdownClickOutside);
     },
     beforeDestroy() {
@@ -102,34 +105,41 @@ export default {
             try {
                 const response = await axios.get('/config/music_list.json');
                 this.audioSources = response.data;
-                this.currentAudioSource = this.getRandomSong();
+                this.shuffleSongs();
+                this.currentAudioSource = this.audioSources[this.shuffledIndices[this.currentIndex]];
             } catch (error) {
                 console.error('음악 데이터를 불러오는 중 오류 발생:', error);
             }
+        },
+        shuffleSongs() {
+            this.shuffledIndices = Array.from(Array(this.audioSources.length).keys());
+            for (let i = this.shuffledIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [this.shuffledIndices[i], this.shuffledIndices[j]] = [this.shuffledIndices[j], this.shuffledIndices[i]];
+            }
+        },
+        playNextSong() {
+            this.currentIndex++;
+            if (this.currentIndex < this.shuffledIndices.length) {
+                this.currentAudioSource = this.audioSources[this.shuffledIndices[this.currentIndex]];
+                this.startTitleScroll();
+                const audio = this.$refs.audio;
+                audio.load();
+                audio.onloadeddata = () => {
+                    audio.play();
+                };
+            } else {
+                this.stopPlayback();
+            }
+        },
+        stopPlayback() {
+            this.isPlaying = false;
+            this.stopTitleScroll();
         },
         goToPage(target, index) {
             if (this.$router.currentRoute.path !== target) {
                 this.selectedIndex = index;
                 this.$router.push(target);
-            }
-        },
-        Joinmember(event) {
-            event.preventDefault();
-            alert(JSON.stringify(this.form));
-            this.$nextTick(() => {
-                this.form.id = "";
-                this.form.pass = "";
-                this.form.mail = "";
-                this.form.checkedtype = [];
-            });
-        },
-        handleScroll() {
-            const scrollTop = window.pageYOffset;
-            const headerTop = document.querySelector("header").clientHeight;
-            if (scrollTop < headerTop) {
-                this.Topclass = "";
-            } else {
-                this.Topclass = "scrollTop";
             }
         },
         togglePlayback() {
@@ -158,24 +168,6 @@ export default {
         stopTitleScroll() {
             clearInterval(this.titleScrollInterval);
             document.title = this.originalTitle;
-        },
-        getRandomSong() {
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * this.audioSources.length);
-            } while (randomIndex === this.lastPlayedIndex);
-
-            this.lastPlayedIndex = randomIndex;
-            return this.audioSources[randomIndex];
-        },
-        playRandomSong() {
-            this.currentAudioSource = this.getRandomSong();
-            this.startTitleScroll();
-            const audio = this.$refs.audio;
-            audio.load();
-            audio.onloadeddata = () => {
-                audio.play();
-            };
         },
         toggleDropdown() {
             this.dropdownOpen = !this.dropdownOpen;
@@ -370,5 +362,4 @@ export default {
         min-width: 260px;
     }
 }
-
 </style>
