@@ -1,8 +1,8 @@
 [
-    { "title": "Cavatina - Deer Hunter OST", "src": "/musics/cavatina.mp3" },
+    { "title": "Cavatina - Deer Hunter OST", "src": "/musics/cavatina_vol.mp3" },
     { "title": "MIC Drop - BTS", "src": "/musics/mic_drop.mp3" },
     { "title": "You Are Not Alone - Michael Jackson", "src": "/musics/not_alone.mp3" },
-    { "title": "사람이었네 - 루시드폴", "src": "/musics/human.mp3" },
+    { "title": "사람이었네 - 루시드폴", "src": "/musics/human_vol.mp3" },
     { "title": "봉우리 - 김민기", "src": "/musics/mountaintop.mp3" },
     { "title": "내 낡은 서랍 속의 바다 - Panic", "src": "/musics/see_drawer.mp3" },
     { "title": "나에게 쓰는 편지 - 신해철", "src": "/musics/letter_to_me.mp3" },
@@ -13,7 +13,7 @@
     { "title": "바람기억 - 나얼", "src": "/musics/wind_memory.mp3" },
     { "title": "먼훗날 언젠가 - N.EX.T", "src": "/musics/some_day_future.mp3" },
     { "title": "오르막길 - 정인", "src": "/musics/uphill.mp3" },
-    { "title": "손에 손잡고 - 코리아나", "src": "/musics/hand_in_hand.mp3" },
+    { "title": "손에 손잡고 - 코리아나", "src": "/musics/hand_in_hand_vol.mp3" },
     { "title": "너랑나 - IU", "src": "/musics/you_and_I.mp3" },
     { "title": "내 마음에 비친 내 모습 - 유재하", "src": "/musics/mind_me_vol.mp3" },
     { "title": "인생의 회전목마 - 하울의 움직이는 성 OST", "src": "/musics/moving_castle.mp3" }
