@@ -90,7 +90,7 @@
                     </div>
                     <div class="spacer"></div>
                     <div class="totalInvest">
-                        <label class="cate"><i class="bi bi-bookmark-check-fill" />진입 총가격</label>
+                        <label class="cate"><i class="bi bi-bookmark-check-fill" />진입 총금액</label>
                         <label class="value">{{ formattedInputTotalMoney }}</label>
                     </div>
                     <div class="clipboard-write">
@@ -171,7 +171,7 @@ export default {
                 console.log('클립보드에 값이복사되었습니다:', value);
                 //const formattedValue = this.formattedInputTotalMoney; // formattedInputTotalMoney 값을 가져옵니다.
                 this.alertMessage = 
-                    `[진입 총가격]<br>( USDT : 
+                    `[진입 총금액]<br>( USDT : 
                     <span style="color: rgb(37, 37, 161);">${this.formattedInputTotalMoney} </span>)<br><br>
                     복사되었습니다.`;
                 this.$refs.alertModal.show();
