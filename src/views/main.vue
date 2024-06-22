@@ -114,22 +114,22 @@
                 </div>
             </div>
         </b-modal>
-        <b-modal id="alertModal" class="modal" hide-footer ref="alertModal">
-    <template #modal-title>
-        <div class="layertit">
-            <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
-            <span class="alertInfo">알림</span>
-        </div>
-    </template>
-    <div class="modalcontainer">
-        <div class="alertMessage">
-            <label v-html="alertMessage"></label>
-        </div>
-        <div v-if="alertMessage === '클립보드 읽기 권한이 거부되었습니다.'">
-            <p>브라우저 설정에서 클립보드 권한을 허용해주세요.</p>
-        </div>
-    </div>
-</b-modal>
+        <b-modal id="alertModal" class="modal" hide-footer ref="alertModal" >
+            <template #modal-title>
+                <div class="layertit">
+                    <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
+                    <span class="alertInfo">알림</span>
+                </div>
+            </template>
+            <div class="modalcontainer">
+                <div class="alertMessage">
+                    <label v-html="alertMessage"></label>
+                </div>
+                <div v-if="alertMessage === '클립보드 읽기 권한이 거부되었습니다.'">
+                    <p>브라우저 설정에서 클립보드 권한을 허용해주세요.</p>
+                </div>
+            </div>
+        </b-modal>
 
     </div>
 </template>
@@ -160,17 +160,17 @@ export default {
     },
     methods: {
         handleTouchStart() {
-      //this.showClipTooltip = true;
-    },
-    handleTouchEnd() {
-      //this.showClipTooltip = false;
-    },
+            //this.showClipTooltip = true;
+        },
+        handleTouchEnd() {
+            //this.showClipTooltip = false;
+        },
         async writeToClipboard(value) {
             try {
                 await navigator.clipboard.writeText(this.inputTotalMoney);
                 console.log('클립보드에 값이복사되었습니다:', value);
                 //const formattedValue = this.formattedInputTotalMoney; // formattedInputTotalMoney 값을 가져옵니다.
-                this.alertMessage = 
+                this.alertMessage =
                     `[진입 총금액]<br>( USDT : 
                     <span style="color: rgb(37, 37, 161);">${this.formattedInputTotalMoney} </span>)<br><br>
                     복사되었습니다.`;
@@ -206,7 +206,7 @@ export default {
                 this.entryPrice = parseFloat(numbers[0]);
                 this.stopLoss = parseFloat(numbers[1]);
             } else {
-                this.alertMessage = 
+                this.alertMessage =
                     `클립보드에 유효한 데이터가 없습니다. <br><br>
                      복사된 클립보드 Text 중 에서 <br><br> 
                      ≡ <span style="color: rgb(37, 37, 161);">첫 번째 숫자 를 [진입가]</span> <br>
