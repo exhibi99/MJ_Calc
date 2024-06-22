@@ -210,7 +210,7 @@ export default {
                     `클립보드에 유효한 데이터가 없습니다. <br><br>
                      복사된 클립보드 Text 중 에서 <br><br> 
                      ≡ <span style="color: rgb(37, 37, 161);">첫 번째 숫자 를 [진입가]</span> <br>
-                     ≡ <span style="color: rgb(169, 36, 36);;">두 번째 숫자 를 [손절가]</span> <br><br>
+                     ≡ <span style="color: rgb(169, 36, 36);">두 번째 숫자 를 [손절가]</span> <br><br>
                      로 인식합니다.`;
                 this.$refs.alertModal.show();
             }
@@ -223,7 +223,8 @@ export default {
                 if (this.entryPrice == 0) {
                     this.alertMessage = "입력을 모두 채워주세요.";
                 } else {
-                    this.alertMessage = `진입가와 손절가가 같습니다.( ${this.entryPrice} )`;
+                    this.alertMessage = `진입가와 손절가가 같습니다.<br><br>
+                        ( USDT : <span style="color: rgb(169, 36, 36);">${this.formattedEntryPrice} </span>)`;
                 }
                 this.$refs.alertModal.show();
                 setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
