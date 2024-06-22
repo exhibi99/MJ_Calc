@@ -91,7 +91,6 @@
                     <div class="spacer"></div>
                     <div class="totalInvest">
                         <label class="cate"><i class="bi bi-bookmark-check-fill" />진입 총가격</label>
-
                         <label class="value">{{ formattedInputTotalMoney }}</label>
                     </div>
                     <div class="clipboard-write">
@@ -170,7 +169,11 @@ export default {
             try {
                 await navigator.clipboard.writeText(this.inputTotalMoney);
                 console.log('클립보드에 값이복사되었습니다:', value);
-                this.alertMessage = "[진입총가격] 이 복사되었습니다.";
+                //const formattedValue = this.formattedInputTotalMoney; // formattedInputTotalMoney 값을 가져옵니다.
+                this.alertMessage = 
+                    `[진입 총가격]<br>( USDT : 
+                    <span style="color: rgb(37, 37, 161);">${this.formattedInputTotalMoney} </span>)<br><br>
+                    복사되었습니다.`;
                 this.$refs.alertModal.show();
                 setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
             } catch (error) {
@@ -206,8 +209,8 @@ export default {
                 this.alertMessage = 
                     `클립보드에 유효한 데이터가 없습니다. <br><br>
                      복사된 클립보드 Text 중 에서 <br><br> 
-                     ≡ <span style="color:blue;">첫 번째 숫자 를 [진입가]</span> <br>
-                     ≡ <span style="color:red;">두 번째 숫자 를 [손절가]</span> <br><br>
+                     ≡ <span style="color: rgb(37, 37, 161);">첫 번째 숫자 를 [진입가]</span> <br>
+                     ≡ <span style="color: rgb(169, 36, 36);;">두 번째 숫자 를 [손절가]</span> <br><br>
                      로 인식합니다.`;
                 this.$refs.alertModal.show();
             }
@@ -336,7 +339,7 @@ export default {
             return this.investRiskMoney ? this.investRiskMoney.toFixed(2).toLocaleString() : "";
         },
         formattedInputTotalMoney() {
-            return this.inputTotalMoney ? this.inputTotalMoney.toLocaleString() : "";
+            return this.inputTotalMoney ? Number(this.inputTotalMoney).toLocaleString() : "";
         },
     },
 };
