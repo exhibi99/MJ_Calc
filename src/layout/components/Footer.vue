@@ -13,7 +13,7 @@ export default {
         const currentDate = new Date();
 
         return{
-            ver_data: '2024.06.13_v01',
+            ver_data: '2024.06.22_v01',
 
             currentDate: currentDate,
             currentYear: currentDate.getFullYear(),
