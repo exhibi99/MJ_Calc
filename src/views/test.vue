@@ -2,11 +2,11 @@
     <div id="cal-input">
         <!-- 기존의 입력 필드들 -->
         <div class="clipboard-button-container">
-            
-        <button class="clipboard-button" @click="readClipboard">
-            <i class="bi bi-clipboard-check"></i> Clipboard 에서 읽기
+
+            <button class="clipboard-button" @click="readClipboard">
+                <i class="bi bi-clipboard-check"></i> Clipboard 에서 읽기
             </button>
-            </div>
+        </div>
         <div class="form-group">
 
             <label for="entryPrice"><i class="bi bi-arrow-right-circle-fill"></i> 진입가</label>
@@ -92,7 +92,14 @@
                     <div class="spacer"></div>
                     <div class="totalInvest">
                         <label class="cate"><i class="bi bi-bookmark-check-fill" />진입 총가격</label>
+
                         <label class="value">{{ formattedInputTotalMoney }}</label>
+                    </div>
+                    <div class="clipboard-write">
+                        <button class="clipboard-write-button" @click="writeToClipboard">
+                            <i class="bi bi-clipboard-check"></i> Clipboard 에 복사하기
+                        </button>
+
                     </div>
                     <div class="calcdata" @mouseover="showIsolTooltip = true" @mouseout="showIsolTooltip = false">
                         <label class="cate"><i class="bi bi-check-lg" />격리 배율</label>
@@ -152,7 +159,19 @@ export default {
         };
     },
     methods: {
-                async readClipboard() {
+        async writeToClipboard(value) {
+            try {
+                await navigator.clipboard.writeText(this.inputTotalMoney);
+                console.log('클립보드에 값이 성공적으로 복사되었습니다:', value);
+                this.alertMessage = "클립보드에 값이 성공적으로 복사되었습니다.";
+                this.$refs.alertModal.show();
+                setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
+            } catch (error) {
+                console.error('클립보드에 값 복사 중 오류가 발생했습니다:', error);
+                // 클립보드에 값이 복사되지 않은 경우의 예외 처리를 여기에 추가할 수 있습니다.
+            }
+        },
+        async readClipboard() {
             try {
                 const permission = await navigator.permissions.query({ name: "clipboard-read" });
                 console.log("Permission state:", permission.state); // 권한 상태 로그 출력
@@ -162,11 +181,13 @@ export default {
                 } else {
                     this.alertMessage = "클립보드 읽기 권한이 거부되었습니다.";
                     this.$refs.alertModal.show(); // 모달 띄우기
+                    setTimeout(this.closeAlertModal, 5000);
                 }
             } catch (error) {
                 console.error("클립보드 읽기 오류:", error); // 오류 로그 출력
                 this.alertMessage = "클립보드를 읽는 중 오류가 발생했습니다.";
                 this.$refs.alertModal.show(); // 모달 띄우기
+                setTimeout(this.closeAlertModal, 5000);
             }
         },
         parseClipboardText(text) {
@@ -324,5 +345,4 @@ export default {
 .clipboard-button:hover {
     background-color: #0056b3;
 }
-
 </style>
