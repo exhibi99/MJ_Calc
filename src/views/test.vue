@@ -1,9 +1,10 @@
 <template>
     <div id="cal-input">
         <!-- 기존의 입력 필드들 -->
-        <div class="form-group centered">
+        <div class="clipboard-button-container">
+            
         <button class="clipboard-button" @click="readClipboard">
-                클립보드에서 읽기
+            <i class="bi bi-clipboard-check"></i> Clipboard 에서 읽기
             </button>
             </div>
         <div class="form-group">
@@ -56,7 +57,7 @@
                 계산하기
             </button>
         </div>
-        <button @click="readClipboard">클립보드에서 읽기</button>
+
         <b-modal id="calcModal" class="modal" hide-footer ref="calcModal">
             <template #modal-title>
                 <div class="layertit"><i class="bi bi-calculator-fill" />진입금액</div>
@@ -323,4 +324,5 @@ export default {
 .clipboard-button:hover {
     background-color: #0056b3;
 }
+
 </style>
