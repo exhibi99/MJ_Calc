@@ -56,7 +56,6 @@ export default {
                 { menutext: "타점 계산", link: "/main" },
                 { menutext: "정보", link: "/info" },
                 { menutext: "스케치", link: "/sketch" },
-                { menutext: "테스트", link: "/test" },
             ],
             selectedIndex: 0,
             form: {
