@@ -2,7 +2,6 @@
     <div id="cal-input">
         <!-- 기존의 입력 필드들 -->
         <div class="clipboard-button-container">
-
             <button class="clipboard-button" @click="readClipboard">
                 <i class="bi bi-clipboard-check"></i> Clipboard 에서 읽기
             </button>
@@ -117,21 +116,22 @@
             </div>
         </b-modal>
         <b-modal id="alertModal" class="modal" hide-footer ref="alertModal">
-            <template #modal-title>
-                <div class="layertit">
-                    <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
-                    <span class="alertInfo">알림</span>
-                </div>
-            </template>
-            <div class="modalcontainer">
-                <div class="alertMessage">
-                    <label>{{ alertMessage }}</label>
-                </div>
-                <div v-if="alertMessage === '클립보드 읽기 권한이 거부되었습니다.'">
-                    <p>브라우저 설정에서 클립보드 권한을 허용해주세요.</p>
-                </div>
-            </div>
-        </b-modal>
+    <template #modal-title>
+        <div class="layertit">
+            <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
+            <span class="alertInfo">알림</span>
+        </div>
+    </template>
+    <div class="modalcontainer">
+        <div class="alertMessage">
+            <label v-html="alertMessage"></label>
+        </div>
+        <div v-if="alertMessage === '클립보드 읽기 권한이 거부되었습니다.'">
+            <p>브라우저 설정에서 클립보드 권한을 허용해주세요.</p>
+        </div>
+    </div>
+</b-modal>
+
     </div>
 </template>
 
@@ -156,9 +156,16 @@ export default {
             alertMessage: "",
             showTooltip: false,
             showIsolTooltip: false,
+            showClipTooltip: true,
         };
     },
     methods: {
+        handleTouchStart() {
+      //this.showClipTooltip = true;
+    },
+    handleTouchEnd() {
+      //this.showClipTooltip = false;
+    },
         async writeToClipboard(value) {
             try {
                 await navigator.clipboard.writeText(this.inputTotalMoney);
@@ -196,7 +203,7 @@ export default {
                 this.entryPrice = parseFloat(numbers[0]);
                 this.stopLoss = parseFloat(numbers[1]);
             } else {
-                this.alertMessage = "클립보드에 유효한 데이터가 없습니다.";
+                this.alertMessage = "클립보드에 유효한 데이터가 없습니다. <br><br>복사된 클립보드 Text 에서 <br><br> ≡ 첫 번째 숫자를 [진입가] <br>≡ 두 번째 숫자를 [손절가] <br><br>로 인식합니다.";
                 this.$refs.alertModal.show();
             }
         },
