@@ -206,8 +206,8 @@ export default {
                 this.alertMessage = 
                     `클립보드에 유효한 데이터가 없습니다. <br><br>
                      복사된 클립보드 Text 중 에서 <br><br> 
-                     ≡ 첫 번째 숫자 를 [진입가] <br>
-                     ≡ 두 번째 숫자 를 [손절가] <br><br>
+                     ≡ <span style="color:blue;">첫 번째 숫자 를 [진입가]</span> <br>
+                     ≡ <span style="color:red;">두 번째 숫자 를 [손절가]</span> <br><br>
                      로 인식합니다.`;
                 this.$refs.alertModal.show();
             }
