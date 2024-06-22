@@ -114,7 +114,7 @@
                 </div>
             </div>
         </b-modal>
-        <b-modal id="alertModal" class="modal" hide-footer ref="alertModal" >
+        <b-modal id="alertModal" class="modal" hide-footer ref="alertModal">
             <template #modal-title>
                 <div class="layertit">
                     <i class="bi bi-exclamation-triangle-fill alert-icon"></i>
@@ -168,7 +168,7 @@ export default {
         async writeToClipboard(value) {
             try {
                 await navigator.clipboard.writeText(this.inputTotalMoney);
-                console.log('클립보드에 값이복사되었습니다:', value);
+                console.log('클립보드에 값이 복사되었습니다:', value);
                 //const formattedValue = this.formattedInputTotalMoney; // formattedInputTotalMoney 값을 가져옵니다.
                 this.alertMessage =
                     `[진입 총금액]<br>( USDT : 
@@ -194,10 +194,21 @@ export default {
                     setTimeout(this.closeAlertModal, 5000);
                 }
             } catch (error) {
-                console.error("클립보드 읽기 오류:", error); // 오류 로그 출력
-                this.alertMessage = "클립보드를 읽는 중 오류가 발생했습니다.";
-                this.$refs.alertModal.show(); // 모달 띄우기
-                setTimeout(this.closeAlertModal, 5000);
+                // 오류가 발생했을 때 오류 로그 출력
+                console.error("클립보드 읽기 오류:", error);
+
+                // 사용자에게 경고 메시지 설정
+                this.alertMessage = `브라우저 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
+        다음 브라우저로 동작 가능.<br><br>
+        · <span style="color: rgb(37, 37, 161);">동작 확인 브라우저 <br><br>
+         ✔ 크롬(Chrome) <br>
+         ✔ 엣지(Edge) <br>
+         ✔ 웨일(Whale) <br>
+         ✔ 삼성(Samsung) <br><br>
+         </span>`;
+
+                // 모달을 띄워서 사용자에게 경고 메시지 표시
+                this.$refs.alertModal.show();
             }
         },
         parseClipboardText(text) {
@@ -209,8 +220,8 @@ export default {
                 this.alertMessage =
                     `클립보드에 유효한 데이터가 없습니다. <br><br>
                      복사된 클립보드 Text 중 에서 <br><br> 
-                     ≡ <span style="color: rgb(37, 37, 161);">첫 번째 숫자 를 [진입가]</span> <br>
-                     ≡ <span style="color: rgb(169, 36, 36);">두 번째 숫자 를 [손절가]</span> <br><br>
+                     ✔ <span style="color: rgb(37, 37, 161);">첫 번째 숫자 를 [진입가]</span> <br>
+                     ✔ <span style="color: rgb(169, 36, 36);">두 번째 숫자 를 [손절가]</span> <br><br>
                      로 인식합니다.`;
                 this.$refs.alertModal.show();
             }
