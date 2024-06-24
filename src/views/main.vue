@@ -130,6 +130,30 @@
                 </div>
             </div>
         </b-modal>
+        <b-modal id="guideModal" class="modal" hide-footer ref="guideModal">
+            <template #modal-title>
+                <div class="layertit">
+                    <i class="bi bi-info-circle icon-guide"></i> 가이드
+                </div>
+            </template>
+            <div class="modalcontainer">
+                <div class="guideMessage">
+                    브라우저 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
+                    다음 브라우저로 동작 가능.<br><br>
+                    · <span style="color: rgb(37, 37, 161);">동작 확인 브라우저 <br><br>
+                        ✔ 크롬(Chrome) <br>
+                        ✔ 엣지(Edge) <br>
+                        ✔ 웨일(Whale) <br>
+                        ✔ 삼성(Samsung) <br><br>
+                    </span>
+                    <b-button variant="link" class="url-button" @click="copyToClipboard('https://mjcalc.site')">URL
+                        복사(mjcalc.site)</b-button>
+                </div>
+                <div class="btnwrap">
+                    <b-button class="guide-confirm-button" @click="closeGuideModal">확인</b-button>
+                </div>
+            </div>
+        </b-modal>
 
     </div>
 </template>
@@ -198,17 +222,18 @@ export default {
                 console.error("클립보드 읽기 오류:", error);
 
                 // 사용자에게 경고 메시지 설정
-                this.alertMessage = `브라우저 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
-        다음 브라우저로 동작 가능.<br><br>
-        · <span style="color: rgb(37, 37, 161);">동작 확인 브라우저 <br><br>
-         ✔ 크롬(Chrome) <br>
-         ✔ 엣지(Edge) <br>
-         ✔ 웨일(Whale) <br>
-         ✔ 삼성(Samsung) <br><br>
-         </span>`;
+                //         this.alertMessage = `브라우저 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
+                // 다음 브라우저로 동작 가능.<br><br>
+                // · <span style="color: rgb(37, 37, 161);">동작 확인 브라우저 <br><br>
+                //  ✔ 크롬(Chrome) <br>
+                //  ✔ 엣지(Edge) <br>
+                //  ✔ 웨일(Whale) <br>
+                //  ✔ 삼성(Samsung) <br><br>
+                //  </span>`;
 
-                // 모달을 띄워서 사용자에게 경고 메시지 표시
-                this.$refs.alertModal.show();
+                //         // 모달을 띄워서 사용자에게 경고 메시지 표시
+                //         this.$refs.alertModal.show();
+                this.openGuideModal();
             }
         },
         parseClipboardText(text) {
@@ -336,6 +361,19 @@ export default {
         toggleTabs() {
             this.tabsEnabled = !this.tabsEnabled;
         },
+        openGuideModal() {
+            this.$refs.guideModal.show();
+        },
+        closeGuideModal() {
+            this.$refs.guideModal.hide();
+        },
+        copyToClipboard(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('URL이 클립보드에 복사되었습니다: ' + url);
+            }).catch(err => {
+                console.error('클립보드 복사에 실패했습니다: ', err);
+            });
+        }
     },
     computed: {
         formattedEntryPrice() {
@@ -358,6 +396,14 @@ export default {
 </script>
 
 <style scoped>
+/deep/ .url-button {
+    color: #238a70 !important;
+    /* 버튼 글자 색상 (예: 토마토색) */
+    text-decoration: underline;
+    /* 선택 사항: 밑줄 추가 */
+    font-weight: bold;
+}
+
 .clipboard-button {
     background-color: #007bff;
     color: white;
