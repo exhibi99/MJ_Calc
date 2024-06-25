@@ -141,13 +141,17 @@
                     브라우저 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
                     다음 브라우저로 동작 가능.<br><br>
                     · <span style="color: rgb(37, 37, 161);">동작 확인 브라우저 <br><br>
-                        ✔ 크롬(Chrome) <br>
-                        ✔ 엣지(Edge) <br>
-                        ✔ 웨일(Whale) <br>
-                        ✔ 삼성(Samsung) <br><br>
+                        <div class="ib-list-container">
+                            <div class="ib-list-box">
+                                <img src="/images/icon/IB_Chrome.png" class="ib-icon"> 크롬(Chrome) <br>
+                                <img src="/images/icon/IB_Edge.png" class="ib-icon"> 엣지(Edge) <br>
+                                <img src="/images/icon/IB_Whale.png" class="ib-icon"> 웨일(Whale) <br>
+                                <img src="/images/icon/IB_Samsung.png" class="ib-icon"> 삼성(Samsung) <br><br>
+                            </div>
+                        </div>
                     </span>
-                    <b-button variant="link" class="url-button" @click="copyToClipboard('https://mjcalc.site')">URL
-                        복사(mjcalc.site)</b-button>
+                    <b-button variant="link" class="url-button" @click="copyToClipboard('https://mjcalc.site')">
+                        <i class="bi bi-clipboard-check ib-icon-copy"></i>URL 복사(mjcalc.site)</b-button>
                 </div>
                 <div class="btnwrap">
                     <b-button class="guide-confirm-button" @click="closeGuideModal">확인</b-button>
@@ -402,5 +406,26 @@ export default {
     text-decoration: underline;
     /* 선택 사항: 밑줄 추가 */
     font-weight: bold;
+    font-size: 16px;
+}
+.ib-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px; /* 원하는 간격으로 조절 가능 */
+    margin-bottom: 5px; /* 원하는 간격으로 조절 가능 */
+    vertical-align: middle; /* 텍스트와 수직 정렬 맞추기 위해 사용 */
+}
+.ib-list-container{
+    width: 100%;
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 (선택 사항) */
+}
+.ib-list-box{
+    width: 150px;
+    text-align: left;
+}
+.ib-icon-copy{
+    font-size: 14px !important;
 }
 </style>
