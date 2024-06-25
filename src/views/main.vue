@@ -373,7 +373,10 @@ export default {
         },
         copyToClipboard(url) {
             navigator.clipboard.writeText(url).then(() => {
-                alert('URL이 클립보드에 복사되었습니다: ' + url);
+                this.alertMessage =
+                    `URL이 클립보드에 복사되었습니다: <br><br>` + url;
+                this.$refs.alertModal.show();
+                setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
             }).catch(err => {
                 console.error('클립보드 복사에 실패했습니다: ', err);
             });
