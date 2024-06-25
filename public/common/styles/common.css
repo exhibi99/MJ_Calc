@@ -1566,15 +1566,16 @@ input:checked+.slider:before {
 
 .modalcontainer {
     font-size: 16px; /* 기본 글자 크기 설정 */
+    font-weight: bold;
 }
 
 .modalcontainer .guideMessage {
-    font-size: 18px; /* 안내 메시지 글자 크기 */
+    font-size: 16px; /* 안내 메시지 글자 크기 */
 }
 
 .modalcontainer .guideMessage .error-text {
     color: rgb(169, 36, 36);
-    font-size: 18px; /* 에러 텍스트 글자 크기 */
+    font-size: 16px; /* 에러 텍스트 글자 크기 */
 }
 
 .modalcontainer .guideMessage .supported-browsers {
@@ -1599,5 +1600,5 @@ input:checked+.slider:before {
     background-color: #3765b9; /* 호버 시 버튼 배경색 (더 진한 파란색) */
 }
 .icon-guide {
-    font-size: 20px; /* 아이콘 크기 조정 */
+    font-size: 22px; /* 아이콘 크기 조정 */
 }
