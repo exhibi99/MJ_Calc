@@ -71,16 +71,28 @@
                         <label class="cate"><i class="bi bi-check-lg" />진입가</label>
                         <label class="value">{{ formattedEntryPrice }}</label>
                     </div>
+                    <div class="clipboard-write">
+                        <button class="copy-entryprice-button" @click="copyToClipboard('진입가가', entryPrice)">
+                            <i class="bi bi-clipboard-check"></i> 진입가 복사
+                        </button>
+                    </div>
                     <div class="lossprice">
                         <label class="cate"><i class="bi bi-check-lg" />손절가</label>
                         <label class="value">{{ formattedStopLoss }}</label>
                     </div>
+                    <div class="clipboard-write">
+                        <button class="copy-stoploss-button" @click="copyToClipboard('손절가가', stopLoss)">
+                            <i class="bi bi-clipboard-check"></i> 손절가 복사
+                        </button>
+                    </div>
                     <div class="calcdata" @mouseover="showTooltip = true" @mouseout="showTooltip = false">
-                        <label class="cate"><i class="bi bi-check-lg" />배율</label>
+                        <label class="cate"><i class="bi bi-check-lg" />
+                            진입 배수
+                        </label>
                         <label class="value">{{ multiRatio.toFixed(2) }}</label>
                         <div class="calctooltip" v-show="showTooltip" @touchstart="showTooltip = false">
                             <div class="tooltip-content">
-                                <img src="/images/MulValue.png" alt="배율 수식" />
+                                <img src="/images/MulValue_2(remove).png" alt="진입배수 수식" />                                
                             </div>
                         </div>
                     </div>
@@ -95,7 +107,7 @@
                     </div>
                     <div class="clipboard-write">
                         <button class="clipboard-write-button" @click="writeToClipboard">
-                            <i class="bi bi-clipboard-check"></i> Clipboard 에 복사하기
+                            <i class="bi bi-clipboard-check"></i> 진입 총금액 복사
                         </button>
 
                     </div>
@@ -104,7 +116,9 @@
                         <label class="value">{{ isolatedMulti }}</label>
                         <div class="Isolatedtooltip" v-show="showIsolTooltip" @touchstart="showIsolTooltip = false">
                             <div class="tooltip-content">
-                                <img src="/images/IsolateMul.png" alt="격리배율 수식" />
+                                <img src="/images/IsolateMul_2(remove).png" alt="격리배율 수식" />
+                                <div>풀시드 진입 기준( 격리 세팅 필요 )</div>
+                                <div>5% 계산을 하기 어려울 때 사용</div>
                             </div>
                         </div>
                     </div>
@@ -133,12 +147,12 @@
         <b-modal id="guideModal" class="modal" hide-footer ref="guideModal">
             <template #modal-title>
                 <div class="layertit">
-                    <i class="bi bi-info-circle icon-guide"></i> 가이드
+                    <i class="bi bi-info-circle icon-guide"></i> 안 내
                 </div>
             </template>
             <div class="modalcontainer">
                 <div class="guideMessage">
-                    브라우저 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
+                    현재 브라우저는 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
                     다음 브라우저로 동작 가능.<br><br>
                     · <span style="color: rgb(37, 37, 161);">동작 확인 브라우저 <br><br>
                         <div class="ib-list-container">
@@ -150,8 +164,9 @@
                             </div>
                         </div>
                     </span>
-                    <b-button variant="link" class="url-button" @click="copyToClipboard('https://mjcalc.site')">
-                        <i class="bi bi-clipboard-check ib-icon-copy"></i>URL 복사(mjcalc.site)</b-button>
+                    <b-button variant="link" class="url-button" @click="copyToClipboard('URL이', 'https://mjcalc.site')">
+                        <i class="bi bi-clipboard-check ib-icon-copy"></i>URL 복사(mjcalc.site)
+                    </b-button>
                 </div>
                 <div class="btnwrap">
                     <b-button class="guide-confirm-button" @click="closeGuideModal">확인</b-button>
@@ -224,19 +239,6 @@ export default {
             } catch (error) {
                 // 오류가 발생했을 때 오류 로그 출력
                 console.error("클립보드 읽기 오류:", error);
-
-                // 사용자에게 경고 메시지 설정
-                //         this.alertMessage = `브라우저 클립보드 <span style="color: rgb(169, 36, 36);">읽기권한 지원 안됨</span>. <br>
-                // 다음 브라우저로 동작 가능.<br><br>
-                // · <span style="color: rgb(37, 37, 161);">동작 확인 브라우저 <br><br>
-                //  ✔ 크롬(Chrome) <br>
-                //  ✔ 엣지(Edge) <br>
-                //  ✔ 웨일(Whale) <br>
-                //  ✔ 삼성(Samsung) <br><br>
-                //  </span>`;
-
-                //         // 모달을 띄워서 사용자에게 경고 메시지 표시
-                //         this.$refs.alertModal.show();
                 this.openGuideModal();
             }
         },
@@ -371,10 +373,10 @@ export default {
         closeGuideModal() {
             this.$refs.guideModal.hide();
         },
-        copyToClipboard(url) {
+        copyToClipboard(text, url) {
             navigator.clipboard.writeText(url).then(() => {
                 this.alertMessage =
-                    `URL이 클립보드에 복사되었습니다: <br><br>` + url;
+                    text + ` 클립보드에 복사되었습니다: <br><br>` + url;
                 this.$refs.alertModal.show();
                 setTimeout(this.closeAlertModal, 1300); // 1초 뒤에 모달 닫기
             }).catch(err => {
