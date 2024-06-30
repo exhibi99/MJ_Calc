@@ -1603,11 +1603,11 @@ input:checked+.slider:before {
 }
 
 .copy-stoploss-button:hover {
-    background-color: #dc9990 !important;
+    background-color: #f0b2ab !important;
 }
 
 .copy-stoploss-button:active {
-    background-color: #e27b6e !important;
+    background-color: rgb(245, 149, 136) !important;
     transform: scale(0.99);
 }
 
