@@ -118,7 +118,7 @@
                             <div class="tooltip-content">
                                 <img src="/images/IsolateMul_2(remove).png" alt="격리배율 수식" />
                                 <div>풀시드 진입 기준( 격리 세팅 필요 )</div>
-                                <div>5% 계산을 하기 어려울 때 사용</div>
+                                <div>리스크 %계산을 하기 어려울 때 사용</div>
                             </div>
                         </div>
                     </div>

@@ -1162,9 +1162,9 @@ nav ul>li>button {
 }
 
 .spacer {
-    margin-bottom: 20px;
+    margin-bottom:10px;
     border-top: 2px solid #ccc;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .calcdata {
@@ -1175,7 +1175,7 @@ nav ul>li>button {
 
 .calcdata .cate {
     width: 120px;
-    height: 50px;
+    height: 40px;
     display: flex;
     align-items: center;
 }
@@ -1350,7 +1350,7 @@ nav ul>li>button {
 
 .Isolatedtooltip {
     position: absolute;
-    top: 415px;
+    top: 380px;
     left: 110px;
     width: 200px;
     background-color: transparent;
