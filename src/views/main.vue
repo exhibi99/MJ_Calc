@@ -72,7 +72,7 @@
                         <label class="value">{{ formattedEntryPrice }}</label>
                     </div>
                     <div class="clipboard-write">
-                        <button class="copy-entryprice-button" @click="copyToClipboard('진입가가', entryPrice)">
+                        <button class="copy-entryprice-button" @click="copyToClipboard('진입가가', formattedEntryPrice)">
                             <i class="bi bi-clipboard-check"></i> 진입가 복사
                         </button>
                     </div>
@@ -81,7 +81,7 @@
                         <label class="value">{{ formattedStopLoss }}</label>
                     </div>
                     <div class="clipboard-write">
-                        <button class="copy-stoploss-button" @click="copyToClipboard('손절가가', stopLoss)">
+                        <button class="copy-stoploss-button" @click="copyToClipboard('손절가가', formattedStopLoss)">
                             <i class="bi bi-clipboard-check"></i> 손절가 복사
                         </button>
                     </div>
